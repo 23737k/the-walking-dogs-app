@@ -1,6 +1,5 @@
 package com.theWalkingDogsApp.demo.model.walkBooking;
 
-import com.theWalkingDogsApp.demo.model.walkRequest.WalkStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
