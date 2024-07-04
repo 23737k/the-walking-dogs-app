@@ -24,7 +24,6 @@ public class ScheduleTest {
     List<TimeSlot> availableTimeSlots = List.of(MORNING,AFTERNOON);
     LocalDate unavailableDate = LocalDate.of(2024,7,2);
 
-    //Disponibilidad: Todos los lunes y martes, mañana y tarde. Excepto el 2024-07-02 (Martes)
     schedule = Schedule.builder()
         .unavailableDates(List.of(unavailableDate))
         .dailyAvailabilities(List.of(
@@ -37,25 +36,30 @@ public class ScheduleTest {
   @Test
   public void testUnavailableDate(){
     LocalDate date = LocalDate.of(2024,7,2);
-    assertFalse(schedule.isAvailable(date,MORNING));
+    assertFalse(schedule.isAvailable(date));
   }
 
   @Test
   public void testAvailableDate(){
-    LocalDate date = LocalDate.of(2024,7,1);
-    assertTrue(schedule.isAvailable(date,MORNING));
+    LocalDate date1 = LocalDate.of(2024,7,1);
+    LocalDate date2 = LocalDate.of(2024,7,23);
+    assertTrue(schedule.isAvailable(date1));
+    assertTrue(schedule.isAvailable(date2));
   }
 
   @Test
-  public void testUnavailableTimeSlot(){
-    LocalDate date = LocalDate.of(2024,7,16); //lunes
-    assertFalse(schedule.isAvailable(date,EVENING));
+  public void testAvailableWeekDay(){
+    assertFalse(schedule.isAvailableForWeekDay(SATURDAY));
+    assertTrue(schedule.isAvailableForWeekDay(MONDAY));
   }
 
   @Test
-  public void testUnavailableWeekDay(){
-    LocalDate date = LocalDate.of(2024,7,3);
-    assertFalse(schedule.isAvailable(date,MORNING));
+  public void testAvailabilityFromStartDateAndWeekDayList(){
+    assertTrue(schedule.isAvailable(LocalDate.of(2024,7,3),List.of(MONDAY,TUESDAY)));
+    assertFalse(schedule.isAvailable(LocalDate.of(2024,7,1),List.of(MONDAY,TUESDAY)));
+    assertFalse(schedule.isAvailable(LocalDate.of(2024,7,3),List.of(MONDAY,TUESDAY,FRIDAY)));
+    assertTrue(schedule.isAvailable(LocalDate.of(2024,7,3),List.of(MONDAY)));
   }
+
 
 }

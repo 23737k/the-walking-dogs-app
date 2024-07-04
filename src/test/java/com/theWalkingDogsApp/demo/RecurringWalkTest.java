@@ -38,4 +38,5 @@ public class RecurringWalkTest {
     assertEquals(LocalDate.of(2024,7,8), booking.getWalks().get(0).getDate());
   }
 
+
 }

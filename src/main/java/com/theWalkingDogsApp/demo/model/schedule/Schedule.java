@@ -26,12 +26,36 @@ public class Schedule {
     dailyAvailabilities.add(dailyAvailability);
   }
 
-  public boolean isAvailable(LocalDate date, TimeSlot timeSlot) {
-    if(unavailableDates.contains(date)) {
-      return false;
-    }
+//  public boolean isAvailable(LocalDate date, TimeSlot timeSlot) {
+//    if(unavailableDates.contains(date)) {
+//      return false;
+//    }
+//    WeekDay weekDay = WeekDay.valueOf(date.getDayOfWeek().toString());
+//    return this.dailyAvailabilities.stream().filter(d -> d.getWeekDay() == weekDay).anyMatch(d -> d.getTimeSlots().contains(timeSlot));
+//  }
+
+  public boolean isAvailable(LocalDate date) {
     WeekDay weekDay = WeekDay.valueOf(date.getDayOfWeek().toString());
-    return this.dailyAvailabilities.stream().filter(d -> d.getWeekDay() == weekDay).anyMatch(d -> d.getTimeSlots().contains(timeSlot));
+    return !unavailableDates.contains(date) && dailyAvailabilities.stream().anyMatch(d -> d.getWeekDay() == weekDay);
+  }
+
+  public boolean isAvailableForWeekDay(WeekDay weekDay) {
+    return dailyAvailabilities.stream().anyMatch(d -> d.getWeekDay() == weekDay);
+  }
+
+  public boolean isAvailable(LocalDate startDate, List<WeekDay> weekDays) {
+    for(WeekDay weekDay : weekDays){
+      if(!isAvailableForWeekDay(weekDay))
+        return false;
+      LocalDate unavailableWeekDay = unavailableDates.stream()
+          .filter(unavailableDate -> WeekDay.valueOf(unavailableDate.getDayOfWeek().toString()).equals(weekDay)).findAny().orElse(null);
+
+      if(unavailableWeekDay != null) {
+        if(unavailableWeekDay.isAfter(startDate))
+          return false;
+      }
+    }
+    return true;
   }
 
 }
