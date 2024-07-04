@@ -6,8 +6,8 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class SearchService {
   private final CareGiverRepo careGiverRepo;
 

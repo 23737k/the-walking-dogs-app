@@ -19,5 +19,6 @@ public class DogWalker {
   private List<WalkBooking> walkBookings;
   private Integer ratePerWalk;
   private List<DogSize> dogSizesAllowed;
+  private Integer serviceRadius;
   private boolean isActive;
 }
