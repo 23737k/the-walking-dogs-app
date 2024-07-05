@@ -28,4 +28,9 @@ public class SingleDayWalk {
   @Column(name = "walking_hour")
   @CollectionTable(joinColumns = @JoinColumn(name = "single_day_walk_id"))
   private List<LocalTime> walkingHours;
+
+  public SingleDayWalk(LocalDate date, List<LocalTime> walkingHours) {
+    this.date = date;
+    this.walkingHours = walkingHours;
+  }
 }

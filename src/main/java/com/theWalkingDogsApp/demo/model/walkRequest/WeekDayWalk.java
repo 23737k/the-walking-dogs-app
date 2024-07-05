@@ -29,4 +29,9 @@ public class WeekDayWalk {
     @Column(name = "walking_hour")
     @CollectionTable(joinColumns = @JoinColumn(name = "week_day_walk_id"))
     private List<LocalTime> walkingHours;
+
+    public WeekDayWalk(WeekDay weekDay, List<LocalTime> walkingHours) {
+        this.weekDay = weekDay;
+        this.walkingHours = walkingHours;
+    }
 }

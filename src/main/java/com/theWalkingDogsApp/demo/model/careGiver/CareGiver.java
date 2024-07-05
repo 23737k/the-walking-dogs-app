@@ -1,6 +1,7 @@
 package com.theWalkingDogsApp.demo.model.careGiver;
 
 import com.theWalkingDogsApp.demo.model.DogWalker;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,7 +15,7 @@ public class CareGiver {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   private BasicInfo basicInfo;
   private String bio;
  @OneToOne
