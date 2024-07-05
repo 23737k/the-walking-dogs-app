@@ -11,7 +11,7 @@ public class ApplicationConfig {
    @Bean
   CommandLineRunner commandLineRunner(Bootstrap bootstrap) {
      return args -> {
-
+        bootstrap.init();
      };
    }
 

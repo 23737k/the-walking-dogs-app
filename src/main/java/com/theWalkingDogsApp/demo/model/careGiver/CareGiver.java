@@ -7,10 +7,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class CareGiver {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,4 +26,10 @@ public class CareGiver {
   private String bio;
  @OneToOne
   private DogWalker dogWalker;
+
+    public CareGiver(BasicInfo basicInfo, String bio, DogWalker dogWalker) {
+        this.basicInfo = basicInfo;
+        this.bio = bio;
+        this.dogWalker = dogWalker;
+    }
 }
