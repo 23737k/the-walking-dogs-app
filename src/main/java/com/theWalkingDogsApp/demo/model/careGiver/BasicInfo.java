@@ -1,10 +1,20 @@
-package com.theWalkingDogsApp.demo.careGiver;
+package com.theWalkingDogsApp.demo.model.careGiver;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import java.time.LocalDate;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@Entity
 public class BasicInfo {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
   private String firstname;
   private String lastname;
   private LocalDate dob;

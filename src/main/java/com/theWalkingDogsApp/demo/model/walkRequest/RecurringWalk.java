@@ -6,17 +6,30 @@ import com.theWalkingDogsApp.demo.model.DogWalker;
 import com.theWalkingDogsApp.demo.model.schedule.WeekDay;
 import com.theWalkingDogsApp.demo.model.walkBooking.Walk;
 import com.theWalkingDogsApp.demo.model.walkBooking.WalkBooking;
-import java.time.LocalTime;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@NoArgsConstructor
+@Entity
 public class RecurringWalk extends WalkRequest{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @OneToMany
+    @JoinColumn(name = "recurring_walk_id")
     private List<WeekDayWalk> weekDayWalks;
     private LocalDate startOfService;
     private LocalDate endOfService;

@@ -1,6 +1,6 @@
-package com.theWalkingDogsApp.demo.search;
+package com.theWalkingDogsApp.demo.model.search;
 
-import com.theWalkingDogsApp.demo.careGiver.CareGiver;
+import com.theWalkingDogsApp.demo.model.careGiver.CareGiver;
 import java.util.List;
 
 public interface SearchCriteria {

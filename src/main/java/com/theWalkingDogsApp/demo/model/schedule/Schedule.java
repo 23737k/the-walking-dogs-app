@@ -1,17 +1,37 @@
 package com.theWalkingDogsApp.demo.model.schedule;
 
 
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
+@Entity
 public class Schedule {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
+  @OneToMany
+  @JoinColumn(name = "schedule_id")
   private List<DailyAvailability> dailyAvailabilities;
+  @ElementCollection
+  @CollectionTable(name = "unavailable_date", joinColumns = @JoinColumn(name = "schedule_id"))
+  @Column(name = "date")
   private List<LocalDate> unavailableDates;
 
   public Schedule(List<DailyAvailability> dailyAvailabilities, List<LocalDate> unavailableDates) {

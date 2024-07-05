@@ -2,6 +2,17 @@ package com.theWalkingDogsApp.demo.model.walkRequest;
 
 import com.theWalkingDogsApp.demo.model.DogWalker;
 import com.theWalkingDogsApp.demo.model.walkBooking.WalkBooking;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,10 +20,18 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type")
 public abstract class WalkRequest {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @ManyToMany
     protected List<Pet> pets;
     protected String phoneNumber;
     protected String message;
+    @ManyToOne
     protected DogWalker dogWalker;
 
     public WalkRequest(List<Pet> pets, String phoneNumber, String message, DogWalker dogWalker){

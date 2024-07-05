@@ -1,7 +1,7 @@
-package com.theWalkingDogsApp.demo.search;
+package com.theWalkingDogsApp.demo.model.search;
 
-import com.theWalkingDogsApp.demo.careGiver.CareGiver;
-import com.theWalkingDogsApp.demo.model.schedule.Schedule;
+import com.theWalkingDogsApp.demo.model.careGiver.CareGiver;
+import com.theWalkingDogsApp.demo.model.schedule.WeekDay;
 import com.theWalkingDogsApp.demo.model.walkRequest.DogSize;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -9,12 +9,15 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class OneTimeWalkCriteria implements SearchCriteria {
-  private List<LocalDate> dates;
+public class RecurringWalkCriteria implements SearchCriteria{
+  private List<WeekDay> weekDays;
+  private LocalDate startDate;
+  private String location;
   private Integer minRatePerWalk;
   private Integer maxRatePerWalk;
-  private String location;
   private List<DogSize> dogSizes;
+
+
 
   @Override
   public List<CareGiver> filter(List<CareGiver> careGivers) {
@@ -38,8 +41,8 @@ public class OneTimeWalkCriteria implements SearchCriteria {
     return new HashSet<>(careGiver.getDogWalker().getDogSizesAllowed()).containsAll(this.dogSizes);
   }
 
-  private boolean isAvailable(CareGiver careGiver) {
-    Schedule schedule = careGiver.getDogWalker().getSchedule();
-    return dates.stream().allMatch(schedule::isAvailable);
+  public boolean isAvailable(CareGiver careGiver) {
+    return careGiver.getDogWalker().getSchedule().isAvailable(startDate, weekDays);
   }
+
 }

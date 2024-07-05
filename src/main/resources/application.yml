@@ -2,7 +2,7 @@ spring:
   application:
     name: TheWalkingDogs
   datasource:
-    url: jdbc:mysql://localhost:3306/the-walking-dogs-app?createDatabaseIfNotExist=true #La bd se crea automaticamente si no existe
+    url: jdbc:mysql://localhost:3306/the_walking_dogs_app?createDatabaseIfNotExist=true #La bd se crea automaticamente si no existe
     username: root
     password:
     driver-class-name: com.mysql.cj.jdbc.Driver

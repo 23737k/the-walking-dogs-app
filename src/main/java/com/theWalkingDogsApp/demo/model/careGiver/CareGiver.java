@@ -1,11 +1,11 @@
-package com.theWalkingDogsApp.demo.careGiver;
+package com.theWalkingDogsApp.demo.model.careGiver;
 
 import com.theWalkingDogsApp.demo.model.DogWalker;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Transient;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @Data
@@ -14,9 +14,9 @@ public class CareGiver {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
-  @Transient
+  @OneToOne
   private BasicInfo basicInfo;
   private String bio;
-  @Transient
+ @OneToOne
   private DogWalker dogWalker;
 }
