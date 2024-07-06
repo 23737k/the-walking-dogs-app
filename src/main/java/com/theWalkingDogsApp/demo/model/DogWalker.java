@@ -4,6 +4,7 @@ import com.theWalkingDogsApp.demo.model.walkRequest.DogSize;
 import com.theWalkingDogsApp.demo.model.walkBooking.WalkBooking;
 import com.theWalkingDogsApp.demo.model.walkRequest.WalkRequest;
 import com.theWalkingDogsApp.demo.model.schedule.Schedule;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -14,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,19 +30,20 @@ public class DogWalker {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
   private Schedule schedule;
   @OneToMany
   @JoinColumn(name="dog_walker_id")
-  private List<WalkRequest> walkRequests;
+  private List<WalkRequest> walkRequests = new ArrayList<>();
   @OneToMany
   @JoinColumn(name = "dog_walker_id")
-  private List<WalkBooking> walkBookings;
+  private List<WalkBooking> walkBookings = new ArrayList<>();
   private Integer ratePerWalk;
   @ElementCollection
   @CollectionTable(joinColumns = @JoinColumn(name = "dog_walker_id"))
   @Column(name = "dogSize")
   private List<DogSize> dogSizesAllowed;
   private Integer serviceRadius;
-  private boolean isActive;
+  private boolean isActive = false;
+
 }

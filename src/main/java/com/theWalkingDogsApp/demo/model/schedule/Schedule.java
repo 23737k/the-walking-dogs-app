@@ -1,6 +1,7 @@
 package com.theWalkingDogsApp.demo.model.schedule;
 
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -26,7 +27,7 @@ public class Schedule {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   @JoinColumn(name = "schedule_id")
   private List<DailyAvailability> dailyAvailabilities;
   @ElementCollection

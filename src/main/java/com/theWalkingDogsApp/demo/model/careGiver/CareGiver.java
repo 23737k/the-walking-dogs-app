@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 public class CareGiver {
   @Id
@@ -24,12 +23,15 @@ public class CareGiver {
   @OneToOne(cascade = CascadeType.ALL)
   private BasicInfo basicInfo;
   private String bio;
- @OneToOne
+ @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
   private DogWalker dogWalker;
 
     public CareGiver(BasicInfo basicInfo, String bio, DogWalker dogWalker) {
         this.basicInfo = basicInfo;
         this.bio = bio;
         this.dogWalker = dogWalker;
+    }
+    public CareGiver(){
+      this.dogWalker = new DogWalker();
     }
 }

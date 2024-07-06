@@ -13,3 +13,11 @@ spring:
     show-sql: true
 server:
   port: 8080
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /doc/swagger-ui.html
+  paths-to-match: /api/**

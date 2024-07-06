@@ -1,6 +1,7 @@
 package com.theWalkingDogsApp.demo.bootstrap;
 
 import com.github.javafaker.Faker;
+import com.theWalkingDogsApp.demo.model.DogWalker;
 import com.theWalkingDogsApp.demo.model.careGiver.BasicInfo;
 import com.theWalkingDogsApp.demo.model.careGiver.CareGiver;
 import com.theWalkingDogsApp.demo.repository.CareGiverRepo;
@@ -42,12 +43,13 @@ public class Bootstrap {
                     .firstname(faker.name().firstName())
                     .lastname(faker.name().lastName())
                     .dob(faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
-                    .phoneNumber(faker.phoneNumber().toString())
+                    .phoneNumber(faker.phoneNumber().phoneNumber())
                     .email(faker.internet().emailAddress())
                     .build();
             CareGiver careGiver = CareGiver.builder()
                     .basicInfo(basicInfo)
-                    .bio(faker.lorem().toString())
+                    .bio(faker.lorem().paragraph())
+                    .dogWalker(new DogWalker())
                     .build();
 
             careGivers.add(careGiver);
