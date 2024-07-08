@@ -56,6 +56,4 @@ public class CareGiverController {
     return new ResponseEntity<>(careGiverService.getDogWalker(id), HttpStatus.OK);
   }
 
-  @GetMapping()
-  public ResponseEntity<?> getAllCareGivers(@RequestParam(required = false) Integer page,){}
 }
