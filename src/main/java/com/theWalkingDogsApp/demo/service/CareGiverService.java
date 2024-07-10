@@ -1,5 +1,7 @@
 package com.theWalkingDogsApp.demo.service;
 
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.theWalkingDogsApp.demo.dto.request.DogWalkerRequestDto;
 import com.theWalkingDogsApp.demo.dto.response.CareGiverResponseDto;
 import com.theWalkingDogsApp.demo.dto.request.CareGiverRequestDto;
@@ -11,6 +13,7 @@ import com.theWalkingDogsApp.demo.service.mapper.DogWalkerMapper;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,8 +23,8 @@ public class CareGiverService {
   private final CareGiverMapper careGiverMapper;
   private final DogWalkerMapper dogWalkerMapper;
 
-  public List<CareGiverResponseDto> getCareGivers(){
-    return careGiverRepo.findAll().stream().map(careGiverMapper::toCareGiverResponseDto).toList();
+  public List<CareGiverResponseDto> getCareGivers(BooleanBuilder predicate){
+    return ((List<CareGiver>)careGiverRepo.findAll(predicate)).stream().map(careGiverMapper::toCareGiverResponseDto).toList();
   }
 
   public CareGiverResponseDto addCareGiver(CareGiverRequestDto careGiverRequestDto){

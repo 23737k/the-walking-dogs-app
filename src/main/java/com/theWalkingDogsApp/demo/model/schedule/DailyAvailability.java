@@ -1,5 +1,6 @@
 package com.theWalkingDogsApp.demo.model.schedule;
 
+import com.querydsl.core.annotations.QueryEmbeddable;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -10,6 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import java.util.HashSet;
 import java.util.List;
 import lombok.Data;
@@ -18,6 +21,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
+@QueryEmbeddable
 public class DailyAvailability {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +32,9 @@ public class DailyAvailability {
   @CollectionTable(joinColumns = @JoinColumn(name = "daily_availability_id"))
   @Column(name = "time_slot")
   private List<TimeSlot> timeSlots;
+  @ManyToOne
+  @JoinColumn(name = "schedule_id")
+  private Schedule schedule;
 
   public DailyAvailability(WeekDay weekDay, List<TimeSlot> timeSlots) {
     this.weekDay = weekDay;

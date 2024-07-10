@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ApplicationConfig {
 
-   @Bean
+  @Bean
   CommandLineRunner commandLineRunner(Bootstrap bootstrap) {
      return args -> {
         bootstrap.init();
