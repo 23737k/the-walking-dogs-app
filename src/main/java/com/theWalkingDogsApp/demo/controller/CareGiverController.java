@@ -28,7 +28,7 @@ public class CareGiverController {
 
   @GetMapping
   public ResponseEntity<?> getCareGivers(@ModelAttribute CareGiverFilter careGiverFilter) {
-    return new ResponseEntity<>(careGiverService.getCareGivers(CareGiverPredicate.buildPredicate(careGiverFilter)), HttpStatus.OK);
+    return new ResponseEntity<>(careGiverService.getCareGivers(careGiverFilter), HttpStatus.OK);
   }
 
   @PostMapping

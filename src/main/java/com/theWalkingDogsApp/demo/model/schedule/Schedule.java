@@ -29,8 +29,8 @@ public class Schedule {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
-  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "schedule", fetch = FetchType.EAGER)
-  @QueryEmbedded
+  @OneToMany(cascade = CascadeType.ALL)
+  @JoinColumn(name = "schedule")
   private List<DailyAvailability> dailyAvailabilities;
   @ElementCollection
   @CollectionTable(name = "unavailable_date", joinColumns = @JoinColumn(name = "schedule_id"))
@@ -49,13 +49,6 @@ public class Schedule {
     dailyAvailabilities.add(dailyAvailability);
   }
 
-//  public boolean isAvailable(LocalDate date, TimeSlot timeSlot) {
-//    if(unavailableDates.contains(date)) {
-//      return false;
-//    }
-//    WeekDay weekDay = WeekDay.valueOf(date.getDayOfWeek().toString());
-//    return this.dailyAvailabilities.stream().filter(d -> d.getWeekDay() == weekDay).anyMatch(d -> d.getTimeSlots().contains(timeSlot));
-//  }
 
   public boolean isAvailable(LocalDate date) {
     WeekDay weekDay = WeekDay.valueOf(date.getDayOfWeek().toString());

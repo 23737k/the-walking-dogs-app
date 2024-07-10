@@ -5,8 +5,10 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.theWalkingDogsApp.demo.dto.request.DogWalkerRequestDto;
 import com.theWalkingDogsApp.demo.dto.response.CareGiverResponseDto;
 import com.theWalkingDogsApp.demo.dto.request.CareGiverRequestDto;
+import com.theWalkingDogsApp.demo.filter.CareGiverFilter;
 import com.theWalkingDogsApp.demo.model.DogWalker;
 import com.theWalkingDogsApp.demo.model.careGiver.CareGiver;
+import com.theWalkingDogsApp.demo.repository.CareGiverCustom;
 import com.theWalkingDogsApp.demo.repository.CareGiverRepo;
 import com.theWalkingDogsApp.demo.service.mapper.CareGiverMapper;
 import com.theWalkingDogsApp.demo.service.mapper.DogWalkerMapper;
@@ -22,9 +24,11 @@ public class CareGiverService {
   private final CareGiverRepo careGiverRepo;
   private final CareGiverMapper careGiverMapper;
   private final DogWalkerMapper dogWalkerMapper;
+  private final CareGiverCustom careGiverCustom;
 
-  public List<CareGiverResponseDto> getCareGivers(BooleanBuilder predicate){
-    return ((List<CareGiver>)careGiverRepo.findAll(predicate)).stream().map(careGiverMapper::toCareGiverResponseDto).toList();
+  public List<CareGiverResponseDto> getCareGivers(CareGiverFilter filter){
+    //return ((List<CareGiver>)careGiverRepo.findAll(predicate)).stream().map(careGiverMapper::toCareGiverResponseDto).toList();
+    return careGiverCustom.findCareGivers(filter).stream().map(careGiverMapper::toCareGiverResponseDto).toList();
   }
 
   public CareGiverResponseDto addCareGiver(CareGiverRequestDto careGiverRequestDto){

@@ -26,15 +26,12 @@ public class DailyAvailability {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
-  @Enumerated(EnumType.STRING)
+  @Enumerated
   private WeekDay weekDay;
   @ElementCollection
   @CollectionTable(joinColumns = @JoinColumn(name = "daily_availability_id"))
   @Column(name = "time_slot")
   private List<TimeSlot> timeSlots;
-  @ManyToOne
-  @JoinColumn(name = "schedule_id")
-  private Schedule schedule;
 
   public DailyAvailability(WeekDay weekDay, List<TimeSlot> timeSlots) {
     this.weekDay = weekDay;

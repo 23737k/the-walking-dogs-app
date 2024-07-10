@@ -4,6 +4,7 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.theWalkingDogsApp.demo.model.QDogWalker;
 import com.theWalkingDogsApp.demo.model.schedule.QDailyAvailability;
+import com.theWalkingDogsApp.demo.model.schedule.QSchedule;
 import com.theWalkingDogsApp.demo.model.schedule.WeekDay;
 import com.theWalkingDogsApp.demo.model.walkRequest.DogSize;
 import java.time.LocalDate;
@@ -46,7 +47,6 @@ public class CareGiverPredicate {
     for (LocalDate date : dates) {
       WeekDay weekDay = WeekDay.valueOf(date.getDayOfWeek().toString());
       predicate.and(dogWalker.schedule.unavailableDates.contains(date).not());
-      predicate.and(dogWalker.schedule.dailyAvailabilities.any().weekDay.eq(weekDay));
     }
     return predicate;
   }
@@ -54,8 +54,7 @@ public class CareGiverPredicate {
   public static BooleanBuilder isAvailableForWeekDays(List<WeekDay> weekDays) {
     BooleanBuilder predicate = new BooleanBuilder();
     for (WeekDay weekDay : weekDays) {
-      predicate.and(
-          QDogWalker.dogWalker.schedule.dailyAvailabilities.any().weekDay.eq(WeekDay.valueOf(weekDay.toString())));
+      predicate.and(QSchedule.schedule.dailyAvailabilities.any().weekDay.eq(WeekDay.valueOf(weekDay.toString())));
     }
     return predicate;
   }
