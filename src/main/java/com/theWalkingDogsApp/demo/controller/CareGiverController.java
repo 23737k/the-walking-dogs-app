@@ -28,22 +28,26 @@ public class CareGiverController {
   public ResponseEntity<?> getCareGivers(@ModelAttribute CareGiverFilter careGiverFilter) {
     return new ResponseEntity<>(careGiverService.getCareGivers(careGiverFilter), HttpStatus.OK);
   }
+  @GetMapping("/{id}")
+  public ResponseEntity<?> getCareGiverById(@PathVariable Integer id) {
+    return new ResponseEntity<>(careGiverService.getCareGiverById(id),HttpStatus.OK);
+  }
 
   @PostMapping
-  public ResponseEntity<?> addCareGiver(@RequestBody CareGiverRequestDto careGiver) {
+  public ResponseEntity<?> addCareGiver(@RequestBody @Validated CareGiverRequestDto careGiver) {
     return new ResponseEntity<>(careGiverService.addCareGiver(careGiver),HttpStatus.CREATED);
   }
 
   @DeleteMapping("/{id}")
   public ResponseEntity<?> deleteCareGiver (@PathVariable Integer id){
     careGiverService.deleteCareGiver(id);
-    return ResponseEntity.ok().build();
+    return ResponseEntity.noContent().build();
   }
 
   @DeleteMapping
   public ResponseEntity<?> deleteAllCareGivers(){
     careGiverService.deleteAllCareGivers();
-    return ResponseEntity.ok().build();
+    return ResponseEntity.noContent().build();
   }
 
   @PutMapping("/{id}/dogWalkerService")

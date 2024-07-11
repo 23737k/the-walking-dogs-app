@@ -27,8 +27,11 @@ public class CareGiverService {
   private final CareGiverCustom careGiverCustom;
 
   public List<CareGiverResponseDto> getCareGivers(CareGiverFilter filter){
-    //return ((List<CareGiver>)careGiverRepo.findAll(predicate)).stream().map(careGiverMapper::toCareGiverResponseDto).toList();
     return careGiverCustom.findCareGivers(filter).stream().map(careGiverMapper::toCareGiverResponseDto).toList();
+  }
+
+  public CareGiverResponseDto getCareGiverById(Integer id){
+    return careGiverRepo.findById(id).map(careGiverMapper::toCareGiverResponseDto).orElse(null);
   }
 
   public CareGiverResponseDto addCareGiver(CareGiverRequestDto careGiverRequestDto){

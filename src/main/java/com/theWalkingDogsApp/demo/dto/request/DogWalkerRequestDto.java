@@ -13,14 +13,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DogWalkerRequestDto {
   @Valid
-  @NotNull
+  @NotNull(message = "schedule field must not be null")
   private ScheduleRequestDto schedule;
-  @NotNull
-  @Positive
+  @NotNull(message = "ratePerWalk field must not be null")
+  @Positive(message = "ratePerWalk field must be a positive number")
   private Integer ratePerWalk;
-  @NotEmpty
+  @NotEmpty(message = "dogSizesAllowed list must have at least one member")
   private List<DogSize> dogSizesAllowed;
-  @NotNull
-  @Positive
+  @NotNull(message = "serviceRadius field must not be null")
+  @Positive(message = "serviceRadius field must be a positive number")
   private Integer serviceRadius;
+  @NotNull(message = "isActive field must be not null")
+  private boolean isActive;
 }

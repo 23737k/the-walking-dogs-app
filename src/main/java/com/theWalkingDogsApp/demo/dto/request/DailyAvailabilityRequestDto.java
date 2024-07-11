@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class DailyAvailabilityRequestDto {
-  @NotNull
+  @NotNull(message = "weekDay field must not be null")
   private WeekDay weekDay;
-  @NotEmpty
+  @NotEmpty(message = "timeSlots field must not be empty")
   private List<TimeSlot> timeSlots;
 }
