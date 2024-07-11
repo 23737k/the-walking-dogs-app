@@ -15,6 +15,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -31,9 +32,9 @@ public class DailyAvailability {
   @ElementCollection
   @CollectionTable(joinColumns = @JoinColumn(name = "daily_availability_id"))
   @Column(name = "time_slot")
-  private List<TimeSlot> timeSlots;
+  private Set<TimeSlot> timeSlots;
 
-  public DailyAvailability(WeekDay weekDay, List<TimeSlot> timeSlots) {
+  public DailyAvailability(WeekDay weekDay, Set<TimeSlot> timeSlots) {
     this.weekDay = weekDay;
     this.timeSlots = timeSlots;
   }

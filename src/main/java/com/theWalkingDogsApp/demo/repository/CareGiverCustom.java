@@ -3,7 +3,7 @@ package com.theWalkingDogsApp.demo.repository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.theWalkingDogsApp.demo.filter.CareGiverFilter;
-import com.theWalkingDogsApp.demo.filter.CareGiverPredicate;
+import com.theWalkingDogsApp.demo.filter.CareGiverPredicateBuilder;
 import com.theWalkingDogsApp.demo.model.QDogWalker;
 import com.theWalkingDogsApp.demo.model.careGiver.CareGiver;
 import com.theWalkingDogsApp.demo.model.careGiver.QCareGiver;
@@ -22,7 +22,7 @@ public class CareGiverCustom {
     }
 
     public List<CareGiver> findCareGivers(CareGiverFilter filter){
-        BooleanBuilder predicate = CareGiverPredicate.buildPredicate(filter);
+        BooleanBuilder predicate = CareGiverPredicateBuilder.buildPredicate(filter);
         QCareGiver careGiver = QCareGiver.careGiver;
         QDogWalker dogWalker = QDogWalker.dogWalker;
         QSchedule schedule = QSchedule.schedule;

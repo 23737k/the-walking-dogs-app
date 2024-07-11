@@ -16,7 +16,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -25,6 +28,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 public class DogWalker {
   @Id
@@ -42,7 +46,7 @@ public class DogWalker {
   @ElementCollection
   @CollectionTable(joinColumns = @JoinColumn(name = "dog_walker_id"))
   @Column(name = "dogSize")
-  private List<DogSize> dogSizesAllowed;
+  private Set<DogSize> dogSizesAllowed =  new HashSet<>();
   private Integer serviceRadius;
   private boolean isActive = false;
 

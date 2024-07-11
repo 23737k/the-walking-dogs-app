@@ -14,7 +14,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,11 +38,11 @@ public class Schedule {
   @ElementCollection
   @CollectionTable(name = "unavailable_date", joinColumns = @JoinColumn(name = "schedule_id"))
   @Column(name = "date")
-  private List<LocalDate> unavailableDates;
+  private Set<LocalDate> unavailableDates;
 
-  public Schedule(List<DailyAvailability> dailyAvailabilities, List<LocalDate> unavailableDates) {
-    this.dailyAvailabilities = dailyAvailabilities;
-    this.unavailableDates = unavailableDates;
+  public Schedule(List<DailyAvailability> dailyAvailabilities, Set<LocalDate> unavailableDates) {
+    this.dailyAvailabilities = filterDuplicatedWeekDays(dailyAvailabilities);
+    this.unavailableDates = unavailableDates == null ? new HashSet<>() : unavailableDates;
   }
   public void addUnavailableDate(LocalDate date) {
     unavailableDates.add(date);
@@ -47,6 +50,14 @@ public class Schedule {
 
   public void addDailyAvailability(DailyAvailability dailyAvailability) {
     dailyAvailabilities.add(dailyAvailability);
+  }
+
+  public List<DailyAvailability> filterDuplicatedWeekDays(List<DailyAvailability> dailyAvailabilities){
+    if(dailyAvailabilities != null){
+      Set<WeekDay> seenWeekDays = new HashSet<>();
+      return dailyAvailabilities.stream().filter(d -> seenWeekDays.add(d.getWeekDay())).toList();
+    }
+    return new ArrayList<>();
   }
 
 

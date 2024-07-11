@@ -36,6 +36,10 @@ public class CareGiverService {
     return careGiverMapper.toCareGiverResponseDto(careGiver);
   }
 
+  public List<DogWalker> getAllDogWalkerServices(){
+    return careGiverRepo.findAll().stream().map(CareGiver::getDogWalker).toList();
+  }
+
   public void deleteCareGiver(Integer id){
     if(careGiverRepo.existsById(id))
       careGiverRepo.deleteById(id);

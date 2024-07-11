@@ -7,6 +7,7 @@ import com.theWalkingDogsApp.demo.model.schedule.Schedule;
 import com.theWalkingDogsApp.demo.model.schedule.TimeSlot;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -21,11 +22,11 @@ public class ScheduleTest {
   @BeforeAll
   static void setUpBeforeClass() throws Exception {
 
-    List<TimeSlot> availableTimeSlots = List.of(MORNING,AFTERNOON);
+    Set<TimeSlot> availableTimeSlots = Set.of(MORNING,AFTERNOON);
     LocalDate unavailableDate = LocalDate.of(2024,7,2);
 
     schedule = Schedule.builder()
-        .unavailableDates(List.of(unavailableDate))
+        .unavailableDates(Set.of(unavailableDate))
         .dailyAvailabilities(List.of(
             new DailyAvailability(MONDAY, availableTimeSlots),
             new DailyAvailability(TUESDAY,availableTimeSlots)

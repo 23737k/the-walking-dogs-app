@@ -3,7 +3,6 @@ package com.theWalkingDogsApp.demo.controller;
 import com.theWalkingDogsApp.demo.dto.request.CareGiverRequestDto;
 import com.theWalkingDogsApp.demo.dto.request.DogWalkerRequestDto;
 import com.theWalkingDogsApp.demo.filter.CareGiverFilter;
-import com.theWalkingDogsApp.demo.filter.CareGiverPredicate;
 import com.theWalkingDogsApp.demo.service.CareGiverService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -57,6 +55,11 @@ public class CareGiverController {
   @GetMapping("/{id}/dogWalkerService")
   public ResponseEntity<?> getDogWalkerService(@PathVariable Integer id){
     return new ResponseEntity<>(careGiverService.getDogWalker(id), HttpStatus.OK);
+  }
+
+  @GetMapping("/dogWalkerService")
+  public ResponseEntity<?> getAllDogWalkerServices(){
+    return new ResponseEntity<>(careGiverService.getAllDogWalkerServices(), HttpStatus.OK);
   }
 
 }
