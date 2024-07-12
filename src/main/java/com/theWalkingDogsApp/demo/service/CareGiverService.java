@@ -1,21 +1,19 @@
 package com.theWalkingDogsApp.demo.service;
 
-import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.dsl.BooleanExpression;
-import com.theWalkingDogsApp.demo.dto.request.DogWalkerRequestDto;
+import com.theWalkingDogsApp.demo.dto.request.careGiver.DogWalkerRequestDto;
 import com.theWalkingDogsApp.demo.dto.response.CareGiverResponseDto;
-import com.theWalkingDogsApp.demo.dto.request.CareGiverRequestDto;
+import com.theWalkingDogsApp.demo.dto.request.careGiver.CareGiverRequestDto;
+import com.theWalkingDogsApp.demo.dto.response.DogWalkerResponseDto;
 import com.theWalkingDogsApp.demo.filter.CareGiverFilter;
-import com.theWalkingDogsApp.demo.model.DogWalker;
+import com.theWalkingDogsApp.demo.model.careGiver.DogWalker;
 import com.theWalkingDogsApp.demo.model.careGiver.CareGiver;
 import com.theWalkingDogsApp.demo.repository.CareGiverCustom;
 import com.theWalkingDogsApp.demo.repository.CareGiverRepo;
-import com.theWalkingDogsApp.demo.service.mapper.CareGiverMapper;
-import com.theWalkingDogsApp.demo.service.mapper.DogWalkerMapper;
+import com.theWalkingDogsApp.demo.service.mapper.careGiver.CareGiverMapper;
+import com.theWalkingDogsApp.demo.service.mapper.careGiver.DogWalkerMapper;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -39,8 +37,8 @@ public class CareGiverService {
     return careGiverMapper.toCareGiverResponseDto(careGiver);
   }
 
-  public List<DogWalker> getAllDogWalkerServices(){
-    return careGiverRepo.findAll().stream().map(CareGiver::getDogWalker).toList();
+  public List<DogWalkerResponseDto> getAllDogWalkerServices(){
+    return careGiverRepo.findAll().stream().map(CareGiver::getDogWalker).map(dogWalkerMapper::toDogWalkerResponseDto).toList();
   }
 
   public void deleteCareGiver(Integer id){
@@ -63,9 +61,11 @@ public class CareGiverService {
     careGiverRepo.save(careGiver);
   }
 
-  public DogWalker getDogWalker(Integer id){
+  public DogWalkerResponseDto getDogWalker(Integer id){
     CareGiver careGiver = careGiverRepo.findById(id).orElseThrow(()->new EntityNotFoundException("CareGiver not found"));
-    return careGiver.getDogWalker();
+    return dogWalkerMapper.toDogWalkerResponseDto(careGiver.getDogWalker());
   }
+
+
 
 }

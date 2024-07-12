@@ -1,16 +1,15 @@
 package com.theWalkingDogsApp.demo.model.walkRequest;
 
-import com.theWalkingDogsApp.demo.model.DogWalker;
+import com.theWalkingDogsApp.demo.model.careGiver.DogWalker;
 import com.theWalkingDogsApp.demo.model.walkBooking.WalkBooking;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.DiscriminatorColumn;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
@@ -27,7 +26,7 @@ public abstract class WalkRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     protected List<Pet> pets;
     protected String phoneNumber;
     protected String message;

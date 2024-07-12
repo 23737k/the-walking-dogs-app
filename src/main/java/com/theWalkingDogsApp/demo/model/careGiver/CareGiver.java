@@ -1,6 +1,5 @@
 package com.theWalkingDogsApp.demo.model.careGiver;
 
-import com.theWalkingDogsApp.demo.model.DogWalker;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,7 +9,6 @@ import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Entity

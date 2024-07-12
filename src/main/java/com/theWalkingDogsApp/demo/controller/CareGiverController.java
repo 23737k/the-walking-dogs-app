@@ -1,7 +1,7 @@
 package com.theWalkingDogsApp.demo.controller;
 
-import com.theWalkingDogsApp.demo.dto.request.CareGiverRequestDto;
-import com.theWalkingDogsApp.demo.dto.request.DogWalkerRequestDto;
+import com.theWalkingDogsApp.demo.dto.request.careGiver.CareGiverRequestDto;
+import com.theWalkingDogsApp.demo.dto.request.careGiver.DogWalkerRequestDto;
 import com.theWalkingDogsApp.demo.filter.CareGiverFilter;
 import com.theWalkingDogsApp.demo.service.CareGiverService;
 import lombok.RequiredArgsConstructor;
@@ -65,5 +65,6 @@ public class CareGiverController {
   public ResponseEntity<?> getAllDogWalkerServices(){
     return new ResponseEntity<>(careGiverService.getAllDogWalkerServices(), HttpStatus.OK);
   }
+
 
 }

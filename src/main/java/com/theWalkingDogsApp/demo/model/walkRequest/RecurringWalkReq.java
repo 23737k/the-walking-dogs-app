@@ -2,10 +2,11 @@ package com.theWalkingDogsApp.demo.model.walkRequest;
 
 import static com.theWalkingDogsApp.demo.model.walkBooking.WalkStatus.SCHEDULED;
 
-import com.theWalkingDogsApp.demo.model.DogWalker;
+import com.theWalkingDogsApp.demo.model.careGiver.DogWalker;
 import com.theWalkingDogsApp.demo.model.schedule.WeekDay;
 import com.theWalkingDogsApp.demo.model.walkBooking.Walk;
 import com.theWalkingDogsApp.demo.model.walkBooking.WalkBooking;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,18 +25,18 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-public class RecurringWalk extends WalkRequest{
+public class RecurringWalkReq extends WalkRequest{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "recurring_walk_id")
     private List<WeekDayWalk> weekDayWalks;
     private LocalDate startOfService;
     private LocalDate endOfService;
 
-    public RecurringWalk(List<Pet> pets, String phoneNumber, String message, DogWalker dogWalker,
-                          List<WeekDayWalk> weekDayWalks, LocalDate startOfService, LocalDate endOfService){
+    public RecurringWalkReq(List<Pet> pets, String phoneNumber, String message, DogWalker dogWalker,
+                            List<WeekDayWalk> weekDayWalks, LocalDate startOfService, LocalDate endOfService){
         super(pets,phoneNumber,message,dogWalker);
         this.weekDayWalks = weekDayWalks;
         this.startOfService = startOfService;

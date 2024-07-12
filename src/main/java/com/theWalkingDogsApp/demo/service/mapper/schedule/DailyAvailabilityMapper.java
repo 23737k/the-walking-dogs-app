@@ -1,4 +1,4 @@
-package com.theWalkingDogsApp.demo.service.mapper;
+package com.theWalkingDogsApp.demo.service.mapper.schedule;
 
 import com.theWalkingDogsApp.demo.dto.request.DailyAvailabilityRequestDto;
 import com.theWalkingDogsApp.demo.model.schedule.DailyAvailability;

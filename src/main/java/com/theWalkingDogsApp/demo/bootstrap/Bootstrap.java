@@ -1,7 +1,7 @@
 package com.theWalkingDogsApp.demo.bootstrap;
 
 import com.github.javafaker.Faker;
-import com.theWalkingDogsApp.demo.model.DogWalker;
+import com.theWalkingDogsApp.demo.model.careGiver.DogWalker;
 import com.theWalkingDogsApp.demo.model.careGiver.BasicInfo;
 import com.theWalkingDogsApp.demo.model.careGiver.CareGiver;
 import com.theWalkingDogsApp.demo.model.schedule.DailyAvailability;

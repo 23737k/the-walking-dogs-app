@@ -1,6 +1,6 @@
-package com.theWalkingDogsApp.demo.service.mapper;
+package com.theWalkingDogsApp.demo.service.mapper.careGiver;
 
-import com.theWalkingDogsApp.demo.dto.request.CareGiverRequestDto;
+import com.theWalkingDogsApp.demo.dto.request.careGiver.CareGiverRequestDto;
 import com.theWalkingDogsApp.demo.dto.response.CareGiverResponseDto;
 import com.theWalkingDogsApp.demo.model.careGiver.CareGiver;
 import org.mapstruct.Mapper;

@@ -1,8 +1,7 @@
-package com.theWalkingDogsApp.demo.dto.request;
+package com.theWalkingDogsApp.demo.dto.request.careGiver;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

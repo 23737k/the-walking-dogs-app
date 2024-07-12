@@ -1,6 +1,6 @@
 package com.theWalkingDogsApp.demo.model.walkBooking;
 
-import com.theWalkingDogsApp.demo.model.DogWalker;
+import com.theWalkingDogsApp.demo.model.careGiver.DogWalker;
 import com.theWalkingDogsApp.demo.model.walkRequest.Pet;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
