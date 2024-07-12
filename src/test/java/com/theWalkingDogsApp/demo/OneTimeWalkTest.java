@@ -6,16 +6,16 @@ import static org.mockito.Mockito.mock;
 
 import com.theWalkingDogsApp.demo.model.careGiver.DogWalker;
 import com.theWalkingDogsApp.demo.model.walkBooking.WalkBooking;
-import com.theWalkingDogsApp.demo.model.walkRequest.OneTimeWalkReq;
+import com.theWalkingDogsApp.demo.model.walkRequest.OneTimeWalk;
 import com.theWalkingDogsApp.demo.model.walkRequest.Pet;
-import com.theWalkingDogsApp.demo.model.walkRequest.SingleDayWalk;
+import com.theWalkingDogsApp.demo.model.walkRequest.WalkPerDate;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
-public class OneTimeWalkReqTest {
+public class OneTimeWalkTest {
 
   @Test
   public void testCreateBooking(){
@@ -24,18 +24,18 @@ public class OneTimeWalkReqTest {
     String message = "";
     DogWalker dogWalker = mock(DogWalker.class);
     List<LocalTime> walkingHours = List.of(LocalTime.of(10, 0), LocalTime.of(13, 0), LocalTime.of(20, 0));
-    SingleDayWalk singleDayWalk1 = new SingleDayWalk(LocalDate.of(2024,7,10),walkingHours);
-    SingleDayWalk singleDayWalk2 = new SingleDayWalk(LocalDate.of(2024,7,11),walkingHours);
-    SingleDayWalk singleDayWalk3 = new SingleDayWalk(LocalDate.of(2024,7,12),walkingHours);
+    WalkPerDate walkPerDate1 = new WalkPerDate(LocalDate.of(2024,7,10),walkingHours);
+    WalkPerDate walkPerDate2 = new WalkPerDate(LocalDate.of(2024,7,11),walkingHours);
+    WalkPerDate walkPerDate3 = new WalkPerDate(LocalDate.of(2024,7,12),walkingHours);
 
-    List<SingleDayWalk> singleDayWalks = List.of(singleDayWalk1, singleDayWalk2, singleDayWalk3);
+    List<WalkPerDate> walkPerDates = List.of(walkPerDate1, walkPerDate2, walkPerDate3);
 
-    OneTimeWalkReq
-        oneTimeWalkReq = new OneTimeWalkReq(pets,phoneNumber,message,dogWalker,singleDayWalks);
-    WalkBooking booking = oneTimeWalkReq.createBooking();
+    OneTimeWalk
+        oneTimeWalk = new OneTimeWalk(pets,phoneNumber,message,dogWalker, walkPerDates);
+    WalkBooking booking = oneTimeWalk.createBooking();
 
     assertEquals(9, booking.getWalks().size());
-    assertTrue(booking.getWalks().stream().anyMatch(w -> w.getDate().equals(singleDayWalk1.getDate())));
+    assertTrue(booking.getWalks().stream().anyMatch(w -> w.getDate().equals(walkPerDate1.getDate())));
   }
 
 }

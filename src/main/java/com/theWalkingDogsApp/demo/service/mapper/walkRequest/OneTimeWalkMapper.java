@@ -1,16 +1,16 @@
 package com.theWalkingDogsApp.demo.service.mapper.walkRequest;
 
-import com.theWalkingDogsApp.demo.dto.request.walkRequest.OneTimeReqDto;
-import com.theWalkingDogsApp.demo.model.walkRequest.OneTimeWalkReq;
+import com.theWalkingDogsApp.demo.dto.request.walkSubmission.OTWalkReqDto;
+import com.theWalkingDogsApp.demo.model.walkRequest.OneTimeWalk;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {SingleDayWalkMapper.class})
+@Mapper(componentModel = "spring", uses = {WalksPerDateMapper.class})
 public interface OneTimeWalkMapper {
   @Mapping(source = "dogWalkerId", target = "dogWalker.id")
-  OneTimeWalkReq toOneTimeWalkReq (OneTimeReqDto oneTimeReqDto);
+  OneTimeWalk toOneTimeWalkReq (OTWalkReqDto OTWalkReqDto);
 
-  OneTimeReqDto toOneTimeWalkReqDto (OneTimeWalkReq oneTimeWalkReq);
+  OTWalkReqDto toOneTimeWalkReqDto (OneTimeWalk oneTimeWalk);
 
 
 }

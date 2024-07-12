@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class BasicInfoResponseDto {
+public class BasicInfoResDto {
   private String firstname;
   private String lastname;
   private LocalDate dob;

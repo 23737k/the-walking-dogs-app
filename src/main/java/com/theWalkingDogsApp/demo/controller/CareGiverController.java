@@ -1,7 +1,7 @@
 package com.theWalkingDogsApp.demo.controller;
 
-import com.theWalkingDogsApp.demo.dto.request.careGiver.CareGiverRequestDto;
-import com.theWalkingDogsApp.demo.dto.request.careGiver.DogWalkerRequestDto;
+import com.theWalkingDogsApp.demo.dto.request.careGiver.CareGiverReqDto;
+import com.theWalkingDogsApp.demo.dto.request.careGiver.DogWalkerReqDto;
 import com.theWalkingDogsApp.demo.filter.CareGiverFilter;
 import com.theWalkingDogsApp.demo.service.CareGiverService;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +34,7 @@ public class CareGiverController {
   }
 
   @PostMapping
-  public ResponseEntity<?> addCareGiver(@RequestBody @Validated CareGiverRequestDto careGiver) {
+  public ResponseEntity<?> addCareGiver(@RequestBody @Validated CareGiverReqDto careGiver) {
     return new ResponseEntity<>(careGiverService.addCareGiver(careGiver),HttpStatus.CREATED);
   }
 
@@ -51,8 +51,9 @@ public class CareGiverController {
   }
 
   @PutMapping("/{id}/dogWalkerService")
-  public ResponseEntity<?> setDogWalkerService(@RequestBody @Validated DogWalkerRequestDto dogWalkerRequestDto, @PathVariable Integer id){
-    careGiverService.setDogWalkerService(id,dogWalkerRequestDto);
+  public ResponseEntity<?> setDogWalkerService(@RequestBody @Validated
+                                               DogWalkerReqDto dogWalkerReqDto, @PathVariable Integer id){
+    careGiverService.setDogWalkerService(id, dogWalkerReqDto);
     return new ResponseEntity<>(HttpStatus.OK);
   }
 

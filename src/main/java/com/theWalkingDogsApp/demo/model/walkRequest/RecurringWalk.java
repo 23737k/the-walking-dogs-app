@@ -25,20 +25,20 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-public class RecurringWalkReq extends WalkRequest{
+public class RecurringWalk extends WalkRequest{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "recurring_walk_id")
-    private List<WeekDayWalk> weekDayWalks;
+    private List<WalkPerWeekDay> walkPerWeekDays;
     private LocalDate startOfService;
     private LocalDate endOfService;
 
-    public RecurringWalkReq(List<Pet> pets, String phoneNumber, String message, DogWalker dogWalker,
-                            List<WeekDayWalk> weekDayWalks, LocalDate startOfService, LocalDate endOfService){
+    public RecurringWalk(List<Pet> pets, String phoneNumber, String message, DogWalker dogWalker,
+                         List<WalkPerWeekDay> walkPerWeekDays, LocalDate startOfService, LocalDate endOfService){
         super(pets,phoneNumber,message,dogWalker);
-        this.weekDayWalks = weekDayWalks;
+        this.walkPerWeekDays = walkPerWeekDays;
         this.startOfService = startOfService;
         this.endOfService = endOfService;
     }
@@ -50,15 +50,15 @@ public class RecurringWalkReq extends WalkRequest{
 
     private List<Walk> getWalks(){
         List<Walk> walks = new ArrayList<>();
-        List<WeekDay> weekDays = this.weekDayWalks.stream().map(WeekDayWalk::getWeekDay).toList();
+        List<WeekDay> weekDays = this.walkPerWeekDays.stream().map(WalkPerWeekDay::getWeekDay).toList();
         List<LocalDate> serviceDays = this.startOfService.datesUntil(this.endOfService.plusDays(1))
                 .filter(d-> weekDays.contains(WeekDay.valueOf(d.getDayOfWeek().toString()))).toList();
 
-        for(WeekDayWalk weekDayWalk :  this.weekDayWalks){
-            WeekDay weekDay = weekDayWalk.getWeekDay();
+        for(WalkPerWeekDay walkPerWeekDay :  this.walkPerWeekDays){
+            WeekDay weekDay = walkPerWeekDay.getWeekDay();
             List<LocalDate> sameWeekDayDates = serviceDays.stream().filter(d -> hasSameWeekDay(d,weekDay)).toList();
             for(LocalDate sameWeekDayDate : sameWeekDayDates){
-                for (LocalTime walkHour : weekDayWalk.getWalkingHours()){
+                for (LocalTime walkHour : walkPerWeekDay.getWalkingHours()){
                     walks.add(new Walk(sameWeekDayDate,walkHour,SCHEDULED));
                 }
             }

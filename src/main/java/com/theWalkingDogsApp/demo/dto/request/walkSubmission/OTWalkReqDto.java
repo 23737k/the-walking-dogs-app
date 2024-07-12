@@ -1,4 +1,4 @@
-package com.theWalkingDogsApp.demo.dto.request.walkRequest;
+package com.theWalkingDogsApp.demo.dto.request.walkSubmission;
 
 import java.util.List;
 import lombok.Data;
@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class OneTimeReqDto extends WalkRequestDto{
-  private List<SingleDayWalkDto> singleDayWalks;
+public class OTWalkReqDto extends WalkRequestReqDto {
+  private List<WalksPerDate> singleDayWalks;
 }

@@ -20,14 +20,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-public class OneTimeWalkReq extends WalkRequest{
+public class OneTimeWalk extends WalkRequest{
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   @JoinColumn(name = "one_time_request_id")
-  private List<SingleDayWalk> singleDayWalks;
+  private List<WalkPerDate> walkPerDates;
 
-  public OneTimeWalkReq(List<Pet> pets, String phoneNumber, String message, DogWalker dogWalker, List<SingleDayWalk> singleDayWalks) {
+  public OneTimeWalk(List<Pet> pets, String phoneNumber, String message, DogWalker dogWalker, List<WalkPerDate> walkPerDates) {
     super(pets, phoneNumber, message, dogWalker);
-    this.singleDayWalks = singleDayWalks;
+    this.walkPerDates = walkPerDates;
   }
 
   @Override
@@ -37,9 +37,9 @@ public class OneTimeWalkReq extends WalkRequest{
 
   private List<Walk> getWalks(){
     List<Walk> walks = new ArrayList<>();
-    for(SingleDayWalk singleDayWalk : singleDayWalks){
-      for(LocalTime time : singleDayWalk.getWalkingHours()){
-        walks.add(new Walk(singleDayWalk.getDate(),time, SCHEDULED));
+    for(WalkPerDate walkPerDate : walkPerDates){
+      for(LocalTime time : walkPerDate.getWalkingHours()){
+        walks.add(new Walk(walkPerDate.getDate(),time, SCHEDULED));
       }
     }
     return walks;

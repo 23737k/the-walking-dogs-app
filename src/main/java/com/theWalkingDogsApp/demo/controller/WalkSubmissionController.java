@@ -1,6 +1,6 @@
 package com.theWalkingDogsApp.demo.controller;
 
-import com.theWalkingDogsApp.demo.dto.request.walkRequest.WalkRequestDto;
+import com.theWalkingDogsApp.demo.dto.request.walkSubmission.WalkRequestReqDto;
 import com.theWalkingDogsApp.demo.service.WalkRequestService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/walkRequests")
 @AllArgsConstructor
-public class WalkRequestController {
+public class WalkSubmissionController {
   private final WalkRequestService walkRequestService;
 
   @PostMapping
-  public ResponseEntity<?> addWalkRequest(@RequestBody WalkRequestDto walkRequest) {
+  public ResponseEntity<?> addWalkRequest(@RequestBody WalkRequestReqDto walkRequest) {
     return ResponseEntity.ok(walkRequestService.add(walkRequest));
   }
 

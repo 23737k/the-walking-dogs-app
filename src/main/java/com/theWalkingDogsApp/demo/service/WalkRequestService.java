@@ -1,10 +1,10 @@
 package com.theWalkingDogsApp.demo.service;
 
-import com.theWalkingDogsApp.demo.dto.request.walkRequest.OneTimeReqDto;
-import com.theWalkingDogsApp.demo.dto.request.walkRequest.RecurringWalkDto;
-import com.theWalkingDogsApp.demo.dto.request.walkRequest.WalkRequestDto;
-import com.theWalkingDogsApp.demo.model.walkRequest.OneTimeWalkReq;
-import com.theWalkingDogsApp.demo.model.walkRequest.RecurringWalkReq;
+import com.theWalkingDogsApp.demo.dto.request.walkSubmission.OTWalkReqDto;
+import com.theWalkingDogsApp.demo.dto.request.walkSubmission.RecWalkReqDto;
+import com.theWalkingDogsApp.demo.dto.request.walkSubmission.WalkRequestReqDto;
+import com.theWalkingDogsApp.demo.model.walkRequest.OneTimeWalk;
+import com.theWalkingDogsApp.demo.model.walkRequest.RecurringWalk;
 import com.theWalkingDogsApp.demo.model.walkRequest.WalkRequest;
 import com.theWalkingDogsApp.demo.repository.WalkRequestRepo;
 import com.theWalkingDogsApp.demo.service.mapper.walkRequest.OneTimeWalkMapper;
@@ -24,22 +24,22 @@ public class WalkRequestService {
     return walkRequestRepo.findAll();
   }
 
-  public WalkRequestDto add(WalkRequestDto walkRequestDto) {
+  public WalkRequestReqDto add(WalkRequestReqDto walkRequestReqDto) {
 
     WalkRequest walkRequest;
-    WalkRequestDto walkRequestDtoFromRepo;
+    WalkRequestReqDto walkRequestReqDtoFromRepo;
 
-    if(walkRequestDto instanceof OneTimeReqDto){
-      walkRequest = oneTimeWalkMapper.toOneTimeWalkReq((OneTimeReqDto) walkRequestDto);
-      walkRequestDtoFromRepo = oneTimeWalkMapper.toOneTimeWalkReqDto((OneTimeWalkReq) walkRequestRepo.save(walkRequest));
+    if(walkRequestReqDto instanceof OTWalkReqDto){
+      walkRequest = oneTimeWalkMapper.toOneTimeWalkReq((OTWalkReqDto) walkRequestReqDto);
+      walkRequestReqDtoFromRepo = oneTimeWalkMapper.toOneTimeWalkReqDto((OneTimeWalk) walkRequestRepo.save(walkRequest));
     }
-    else if(walkRequestDto instanceof RecurringWalkDto){
-      walkRequest = recurringWalkMapper.toRecurringWalkReq((RecurringWalkDto) walkRequestDto);
-      walkRequestDtoFromRepo = recurringWalkMapper.toRecurringWalkDto((RecurringWalkReq) walkRequestRepo.save(walkRequest));
+    else if(walkRequestReqDto instanceof RecWalkReqDto){
+      walkRequest = recurringWalkMapper.toRecurringWalkReq((RecWalkReqDto) walkRequestReqDto);
+      walkRequestReqDtoFromRepo = recurringWalkMapper.toRecurringWalkDto((RecurringWalk) walkRequestRepo.save(walkRequest));
     }
     else
       throw new IllegalArgumentException("Invalid type of request");
-    return walkRequestDtoFromRepo;
+    return walkRequestReqDtoFromRepo;
   }
 
 

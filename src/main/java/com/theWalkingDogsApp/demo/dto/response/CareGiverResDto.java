@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CareGiverResponseDto {
+public class CareGiverResDto {
   private Integer id;
-  private BasicInfoResponseDto basicInfo;
+  private BasicInfoResDto basicInfo;
   private String bio;
 }

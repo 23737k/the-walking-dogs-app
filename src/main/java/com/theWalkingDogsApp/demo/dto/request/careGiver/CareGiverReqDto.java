@@ -7,9 +7,9 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CareGiverRequestDto {
+public class CareGiverReqDto {
   @Valid
-  private BasicInfoRequestDto basicInfo;
+  private BasicInfoReqDto basicInfo;
   @NotBlank(message = "bio field must not be empty")
   private String bio;
 }

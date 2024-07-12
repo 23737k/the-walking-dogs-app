@@ -20,7 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class WeekDayWalk {
+public class WalkPerWeekDay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -30,7 +30,7 @@ public class WeekDayWalk {
     @CollectionTable(joinColumns = @JoinColumn(name = "week_day_walk_id"))
     private List<LocalTime> walkingHours;
 
-    public WeekDayWalk(WeekDay weekDay, List<LocalTime> walkingHours) {
+    public WalkPerWeekDay(WeekDay weekDay, List<LocalTime> walkingHours) {
         this.weekDay = weekDay;
         this.walkingHours = walkingHours;
     }

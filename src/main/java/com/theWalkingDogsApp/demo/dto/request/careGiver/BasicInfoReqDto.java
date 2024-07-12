@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class BasicInfoRequestDto {
+public class BasicInfoReqDto {
   @NotBlank(message = "firstname field must not be empty")
   private String firstname;
   @NotBlank(message = "lastname field must not be empty")

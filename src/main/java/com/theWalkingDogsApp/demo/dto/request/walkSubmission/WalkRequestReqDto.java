@@ -1,4 +1,4 @@
-package com.theWalkingDogsApp.demo.dto.request.walkRequest;
+package com.theWalkingDogsApp.demo.dto.request.walkSubmission;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -12,15 +12,15 @@ import lombok.NoArgsConstructor;
     property = "type"
 )
 @JsonSubTypes({
-    @JsonSubTypes.Type(value = OneTimeReqDto.class, name = "one-time"),
-    @JsonSubTypes.Type(value = RecurringWalkDto.class, name = "recurring")
+    @JsonSubTypes.Type(value = OTWalkReqDto.class, name = "one-time"),
+    @JsonSubTypes.Type(value = RecWalkReqDto.class, name = "recurring")
 })
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class WalkRequestDto {
-  protected List<PetDto> pets;
+public class WalkRequestReqDto {
+  protected List<PetReqDto> pets;
   protected String phoneNumber;
   protected String message;
   protected Integer dogWalkerId;
