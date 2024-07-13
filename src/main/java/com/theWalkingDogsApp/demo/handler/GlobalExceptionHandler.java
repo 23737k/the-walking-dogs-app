@@ -1,5 +1,6 @@
 package com.theWalkingDogsApp.demo.handler;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -11,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -39,6 +42,19 @@ public class GlobalExceptionHandler {
         Collectors.toSet());
     return ResponseEntity.badRequest().body(errorMessages);
   }
+
+  @ExceptionHandler(InvalidFormatException.class)
+  public ResponseEntity<Object> handleInvalidFormatException(InvalidFormatException ex, WebRequest request) {
+    String errorMessage = "Invalid format: " + ex.getValue() + " is not a valid value for " + ex.getTargetType().getSimpleName();
+    return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+  public ResponseEntity<Object> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex, WebRequest request) {
+    String errorMessage = "Invalid type: " + ex.getValue() + " is not a valid value for " + ex.getName();
+    return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+  }
+
 
 //  @ExceptionHandler(Exception.class)
 //  public ResponseEntity<?> handleException(Exception e){

@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class WalkRequestResDto {
+  protected Integer id;
   protected List<PetResDto> pets;
   protected String phoneNumber;
   protected String message;

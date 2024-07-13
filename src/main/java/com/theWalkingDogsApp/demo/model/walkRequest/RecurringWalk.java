@@ -26,9 +26,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 public class RecurringWalk extends WalkRequest{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "recurring_walk_id")
     private List<WalksPerWeekDay> walksPerWeekDays;

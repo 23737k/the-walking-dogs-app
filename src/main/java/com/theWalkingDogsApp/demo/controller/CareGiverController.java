@@ -63,7 +63,7 @@ public class CareGiverController {
   }
 
   @GetMapping("/dogWalkerService")
-  public ResponseEntity<?> getAllDogWalkerServices(){
+  public ResponseEntity<?> getAllDogWalkerServices(@PathVariable Integer id){
     return new ResponseEntity<>(careGiverService.getAllDogWalkerServices(), HttpStatus.OK);
   }
 

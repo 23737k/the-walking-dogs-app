@@ -53,7 +53,7 @@ public class CareGiverService {
   }
 
   public void setDogWalkerService(Integer id, DogWalkerReqDto dogWalkerReqDto){
-    CareGiver careGiver = careGiverRepo.findById(id).orElseThrow(()->new EntityNotFoundException("CareGiver not found"));
+    CareGiver careGiver = validate(id);
     DogWalker updatedDogWalker = dogWalkerMapper.toDogWalker(dogWalkerReqDto);
     updatedDogWalker.setActive(true);
     updatedDogWalker.setId(careGiver.getDogWalker().getId());
@@ -62,10 +62,13 @@ public class CareGiverService {
   }
 
   public DogWalkerResDto getDogWalker(Integer id){
-    CareGiver careGiver = careGiverRepo.findById(id).orElseThrow(()->new EntityNotFoundException("CareGiver not found"));
+    CareGiver careGiver = validate(id);
     return dogWalkerMapper.toDogWalkerResponseDto(careGiver.getDogWalker());
   }
 
+  public CareGiver validate(Integer id){
+    return careGiverRepo.findById(id).orElseThrow(()->new EntityNotFoundException("CareGiver not found"));
+  }
 
 
 }

@@ -10,6 +10,8 @@ import com.theWalkingDogsApp.demo.model.walkRequest.WalkRequest;
 import com.theWalkingDogsApp.demo.repository.WalkRequestRepo;
 import com.theWalkingDogsApp.demo.service.mapper.walkRequest.OneTimeWalkMapper;
 import com.theWalkingDogsApp.demo.service.mapper.walkRequest.RecurringWalkMapper;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -23,19 +25,21 @@ public class WalkRequestService {
   private final RecurringWalkMapper recurringWalkMapper;
 
 
-  public List<WalkRequestResDto> getAll() {
-    List<WalkRequest> walkRequests = walkRequestRepo.findAll();
-    if(walkRequests.isEmpty()) {
-      return new ArrayList<>();
+  public List<WalkRequestResDto> getAll(Integer dogWalkerId) {
+    List<WalkRequest> walkRequests = walkRequestRepo.findAllByDogWalkerId(dogWalkerId);
+    List<WalkRequestResDto> dtos = new ArrayList<>();
+
+    for (WalkRequest walkRequest : walkRequests) {
+      if (walkRequest instanceof RecurringWalk recurringWalk) {
+        WalkRequestResDto dto = recurringWalkMapper.toRecurringWalkResDto(recurringWalk);
+        dtos.add(dto);
+      } else if (walkRequest instanceof OneTimeWalk oneTimeWalk) {
+        WalkRequestResDto dto = oneTimeWalkMapper.toOneTimeWalkResDto(oneTimeWalk);
+        dtos.add(dto);
+      }
     }
-    if(walkRequests instanceof RecurringWalk) {
-      return walkRequests.stream().map(w -> (WalkRequestResDto) recurringWalkMapper.toRecurringWalkResDto((RecurringWalk) w)).toList();
-    }
-    else if(walkRequests instanceof OneTimeWalk) {
-      return walkRequests.stream().map(w-> (WalkRequestResDto) oneTimeWalkMapper.toOneTimeWalkResDto((OneTimeWalk) w )).toList();
-    }
-    else
-      return new ArrayList<>();
+
+    return dtos;
   }
 
   public WalkRequestResDto add(WalkRequestReqDto walkRequestReqDto) {
@@ -58,5 +62,18 @@ public class WalkRequestService {
     return walkRequestResDto;
   }
 
+  public void deleteWalkRequest(Integer id) {
+    validate(id);
+    walkRequestRepo.deleteById(id);
+  }
+
+  public WalkRequest validate(Integer id){
+    return walkRequestRepo.findById(id).orElseThrow(()-> new EntityNotFoundException("WalkRequest with id " + id + " not found"));
+  }
+
+  @Transactional
+  public void deleteAllWalkRequests(Integer dogWalkerId){
+    walkRequestRepo.deleteAllByDogWalkerId(dogWalkerId);
+  }
 
 }
