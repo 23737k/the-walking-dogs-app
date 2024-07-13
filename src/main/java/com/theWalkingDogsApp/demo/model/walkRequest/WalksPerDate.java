@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class WalkPerDate {
+public class WalksPerDate {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
@@ -29,7 +29,7 @@ public class WalkPerDate {
   @CollectionTable(joinColumns = @JoinColumn(name = "single_day_walk_id"))
   private List<LocalTime> walkingHours;
 
-  public WalkPerDate(LocalDate date, List<LocalTime> walkingHours) {
+  public WalksPerDate(LocalDate date, List<LocalTime> walkingHours) {
     this.date = date;
     this.walkingHours = walkingHours;
   }

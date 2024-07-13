@@ -1,4 +1,4 @@
-package com.theWalkingDogsApp.demo.dto.request.walkSubmission;
+package com.theWalkingDogsApp.demo.dto.request.walkRequest;
 
 import java.util.List;
 import lombok.Data;
@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class OTWalkReqDto extends WalkRequestReqDto {
-  private List<WalksPerDate> singleDayWalks;
+  private List<WalksPerDateDto> walksPerDates;
 }

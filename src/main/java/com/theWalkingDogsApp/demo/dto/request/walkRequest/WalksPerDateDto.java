@@ -1,4 +1,4 @@
-package com.theWalkingDogsApp.demo.dto.request.walkSubmission;
+package com.theWalkingDogsApp.demo.dto.request.walkRequest;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class WalksPerDate {
+public class WalksPerDateDto {
   private LocalDate date;
   private List<LocalTime> walkingHours;
 }

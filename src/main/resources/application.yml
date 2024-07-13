@@ -14,17 +14,6 @@ spring:
 server:
   port: 8080
 
-logging:
-  level:
-    org:
-      hibernate:
-        SQL: DEBUG
-        type:
-          descriptor:
-            sql:
-              BasicBinder: TRACE
-
-
 springdoc:
   api-docs:
     enabled: true
@@ -32,3 +21,6 @@ springdoc:
     enabled: true
     path: /doc/swagger-ui.html
   paths-to-match: /api/**
+
+bootstrap:
+  number-of-care-givers: 10

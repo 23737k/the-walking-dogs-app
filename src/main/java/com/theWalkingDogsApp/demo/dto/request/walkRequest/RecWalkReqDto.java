@@ -1,4 +1,4 @@
-package com.theWalkingDogsApp.demo.dto.request.walkSubmission;
+package com.theWalkingDogsApp.demo.dto.request.walkRequest;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class RecWalkReqDto extends WalkRequestReqDto {
-  private List<WalksPerWeekDay> weekDayWalks;
+  private List<WalksPerWeekDayDto> walksPerWeekDays;
   private LocalDate startOfService;
   private LocalDate endOfService;
 

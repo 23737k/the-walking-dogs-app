@@ -23,11 +23,11 @@ import lombok.NoArgsConstructor;
 public class OneTimeWalk extends WalkRequest{
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   @JoinColumn(name = "one_time_request_id")
-  private List<WalkPerDate> walkPerDates;
+  private List<WalksPerDate> walksPerDates;
 
-  public OneTimeWalk(List<Pet> pets, String phoneNumber, String message, DogWalker dogWalker, List<WalkPerDate> walkPerDates) {
+  public OneTimeWalk(List<Pet> pets, String phoneNumber, String message, DogWalker dogWalker, List<WalksPerDate> walksPerDates) {
     super(pets, phoneNumber, message, dogWalker);
-    this.walkPerDates = walkPerDates;
+    this.walksPerDates = walksPerDates;
   }
 
   @Override
@@ -37,9 +37,9 @@ public class OneTimeWalk extends WalkRequest{
 
   private List<Walk> getWalks(){
     List<Walk> walks = new ArrayList<>();
-    for(WalkPerDate walkPerDate : walkPerDates){
-      for(LocalTime time : walkPerDate.getWalkingHours()){
-        walks.add(new Walk(walkPerDate.getDate(),time, SCHEDULED));
+    for(WalksPerDate walksPerDate : walksPerDates){
+      for(LocalTime time : walksPerDate.getWalkingHours()){
+        walks.add(new Walk(walksPerDate.getDate(),time, SCHEDULED));
       }
     }
     return walks;

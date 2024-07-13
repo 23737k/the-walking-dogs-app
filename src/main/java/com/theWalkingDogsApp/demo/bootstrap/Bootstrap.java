@@ -18,6 +18,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
@@ -30,6 +31,8 @@ import java.util.Locale;
 public class Bootstrap {
     private final EntityManager em;
     private final CareGiverRepo careGiverRepo;
+    @Value("${bootstrap.number-of-care-givers}")
+    private int numberOfCareGivers;
 
     @Transactional
     public void init(){
@@ -41,7 +44,7 @@ public class Bootstrap {
 
     @Transactional
     protected void loadCareGivers(){
-        careGiverRepo.saveAll(createCareGiver(30));
+        careGiverRepo.saveAll(createCareGiver(numberOfCareGivers));
     }
 
     private List<CareGiver> createCareGiver(int n){
@@ -66,7 +69,7 @@ public class Bootstrap {
 
             CareGiver careGiver = CareGiver.builder()
                     .basicInfo(basicInfo)
-                    .bio(faker.lorem().paragraph())
+                    .bio("esto es una bio")
                     .dogWalker(dogWalker)
                     .build();
 

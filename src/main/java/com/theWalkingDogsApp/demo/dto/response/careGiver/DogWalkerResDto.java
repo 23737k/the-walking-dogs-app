@@ -1,6 +1,6 @@
-package com.theWalkingDogsApp.demo.dto.response;
+package com.theWalkingDogsApp.demo.dto.response.careGiver;
 
-import com.theWalkingDogsApp.demo.dto.request.walkSubmission.WalkRequestReqDto;
+import com.theWalkingDogsApp.demo.dto.response.walkRequest.WalkRequestResDto;
 import com.theWalkingDogsApp.demo.model.schedule.Schedule;
 import com.theWalkingDogsApp.demo.model.walkBooking.WalkBooking;
 import com.theWalkingDogsApp.demo.model.walkRequest.DogSize;
@@ -16,7 +16,8 @@ import lombok.NoArgsConstructor;
 public class DogWalkerResDto {
   private Integer id;
   private Schedule schedule;
-  private List<WalkRequestReqDto> walkRequests = new ArrayList<>();
+  private List<WalkRequestResDto> walkRequests = new ArrayList<>();
+  //TODO crear dtos para WalkBooking
   private List<WalkBooking> walkBookings = new ArrayList<>();
   private Integer ratePerWalk;
   private Set<DogSize> dogSizesAllowed =  new HashSet<>();

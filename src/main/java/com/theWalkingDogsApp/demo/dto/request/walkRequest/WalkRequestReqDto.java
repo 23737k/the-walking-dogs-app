@@ -1,4 +1,4 @@
-package com.theWalkingDogsApp.demo.dto.request.walkSubmission;
+package com.theWalkingDogsApp.demo.dto.request.walkRequest;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

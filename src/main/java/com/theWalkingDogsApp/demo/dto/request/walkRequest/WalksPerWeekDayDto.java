@@ -1,4 +1,4 @@
-package com.theWalkingDogsApp.demo.dto.request.walkSubmission;
+package com.theWalkingDogsApp.demo.dto.request.walkRequest;
 
 import com.theWalkingDogsApp.demo.model.schedule.WeekDay;
 import java.time.LocalTime;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class WalksPerWeekDay {
+public class WalksPerWeekDayDto {
   private WeekDay weekDay;
   private List<LocalTime> walkingHours;
 }

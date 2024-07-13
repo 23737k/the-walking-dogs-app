@@ -1,9 +1,9 @@
 package com.theWalkingDogsApp.demo.service;
 
 import com.theWalkingDogsApp.demo.dto.request.careGiver.DogWalkerReqDto;
-import com.theWalkingDogsApp.demo.dto.response.CareGiverResDto;
+import com.theWalkingDogsApp.demo.dto.response.careGiver.CareGiverResDto;
 import com.theWalkingDogsApp.demo.dto.request.careGiver.CareGiverReqDto;
-import com.theWalkingDogsApp.demo.dto.response.DogWalkerResDto;
+import com.theWalkingDogsApp.demo.dto.response.careGiver.DogWalkerResDto;
 import com.theWalkingDogsApp.demo.filter.CareGiverFilter;
 import com.theWalkingDogsApp.demo.model.careGiver.DogWalker;
 import com.theWalkingDogsApp.demo.model.careGiver.CareGiver;

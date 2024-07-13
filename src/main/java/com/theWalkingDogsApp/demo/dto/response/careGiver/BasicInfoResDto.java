@@ -1,4 +1,4 @@
-package com.theWalkingDogsApp.demo.dto.response;
+package com.theWalkingDogsApp.demo.dto.response.careGiver;
 
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;

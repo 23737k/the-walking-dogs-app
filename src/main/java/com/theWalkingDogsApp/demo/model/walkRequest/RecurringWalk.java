@@ -31,14 +31,14 @@ public class RecurringWalk extends WalkRequest{
     private Integer id;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "recurring_walk_id")
-    private List<WalkPerWeekDay> walkPerWeekDays;
+    private List<WalksPerWeekDay> walksPerWeekDays;
     private LocalDate startOfService;
     private LocalDate endOfService;
 
     public RecurringWalk(List<Pet> pets, String phoneNumber, String message, DogWalker dogWalker,
-                         List<WalkPerWeekDay> walkPerWeekDays, LocalDate startOfService, LocalDate endOfService){
+                         List<WalksPerWeekDay> walksPerWeekDays, LocalDate startOfService, LocalDate endOfService){
         super(pets,phoneNumber,message,dogWalker);
-        this.walkPerWeekDays = walkPerWeekDays;
+        this.walksPerWeekDays = walksPerWeekDays;
         this.startOfService = startOfService;
         this.endOfService = endOfService;
     }
@@ -50,15 +50,15 @@ public class RecurringWalk extends WalkRequest{
 
     private List<Walk> getWalks(){
         List<Walk> walks = new ArrayList<>();
-        List<WeekDay> weekDays = this.walkPerWeekDays.stream().map(WalkPerWeekDay::getWeekDay).toList();
+        List<WeekDay> weekDays = this.walksPerWeekDays.stream().map(WalksPerWeekDay::getWeekDay).toList();
         List<LocalDate> serviceDays = this.startOfService.datesUntil(this.endOfService.plusDays(1))
                 .filter(d-> weekDays.contains(WeekDay.valueOf(d.getDayOfWeek().toString()))).toList();
 
-        for(WalkPerWeekDay walkPerWeekDay :  this.walkPerWeekDays){
-            WeekDay weekDay = walkPerWeekDay.getWeekDay();
+        for(WalksPerWeekDay walksPerWeekDay :  this.walksPerWeekDays){
+            WeekDay weekDay = walksPerWeekDay.getWeekDay();
             List<LocalDate> sameWeekDayDates = serviceDays.stream().filter(d -> hasSameWeekDay(d,weekDay)).toList();
             for(LocalDate sameWeekDayDate : sameWeekDayDates){
-                for (LocalTime walkHour : walkPerWeekDay.getWalkingHours()){
+                for (LocalTime walkHour : walksPerWeekDay.getWalkingHours()){
                     walks.add(new Walk(sameWeekDayDate,walkHour,SCHEDULED));
                 }
             }
