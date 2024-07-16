@@ -23,8 +23,7 @@ public class WalkRequestController {
 
   @PostMapping
   public ResponseEntity<?> addWalkRequest(@PathVariable Integer careGiverId, @RequestBody @Validated WalkRequestReqDto walkRequest) {
-    careGiverService.validate(careGiverId);
-    return ResponseEntity.ok(walkRequestService.add(walkRequest));
+    return ResponseEntity.ok(walkRequestService.add(careGiverId, walkRequest));
   }
 
   @GetMapping

@@ -20,6 +20,7 @@ springdoc:
   swagger-ui:
     enabled: true
     path: /doc/swagger-ui.html
+    url: /swagger-ui.yml
   paths-to-match: /api/**
 
 bootstrap:

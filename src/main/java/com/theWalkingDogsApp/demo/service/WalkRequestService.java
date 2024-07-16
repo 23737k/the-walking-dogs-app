@@ -4,9 +4,12 @@ import com.theWalkingDogsApp.demo.dto.request.walkRequest.OTWalkReqDto;
 import com.theWalkingDogsApp.demo.dto.request.walkRequest.RecWalkReqDto;
 import com.theWalkingDogsApp.demo.dto.request.walkRequest.WalkRequestReqDto;
 import com.theWalkingDogsApp.demo.dto.response.walkRequest.WalkRequestResDto;
+import com.theWalkingDogsApp.demo.model.careGiver.CareGiver;
+import com.theWalkingDogsApp.demo.model.careGiver.DogWalker;
 import com.theWalkingDogsApp.demo.model.walkRequest.OneTimeWalk;
 import com.theWalkingDogsApp.demo.model.walkRequest.RecurringWalk;
 import com.theWalkingDogsApp.demo.model.walkRequest.WalkRequest;
+import com.theWalkingDogsApp.demo.repository.CareGiverRepo;
 import com.theWalkingDogsApp.demo.repository.WalkRequestRepo;
 import com.theWalkingDogsApp.demo.service.mapper.walkRequest.OneTimeWalkMapper;
 import com.theWalkingDogsApp.demo.service.mapper.walkRequest.RecurringWalkMapper;
@@ -23,6 +26,8 @@ public class WalkRequestService {
   private final WalkRequestRepo walkRequestRepo;
   private final OneTimeWalkMapper oneTimeWalkMapper;
   private final RecurringWalkMapper recurringWalkMapper;
+  private final CareGiverRepo careGiverRepo;
+  private final CareGiverService careGiverService;
 
 
   public List<WalkRequestResDto> getAll(Integer dogWalkerId) {
@@ -42,19 +47,25 @@ public class WalkRequestService {
     return dtos;
   }
 
-  public WalkRequestResDto add(WalkRequestReqDto walkRequestReqDto) {
+  public WalkRequestResDto add(Integer careGiverId, WalkRequestReqDto walkRequestReqDto) {
 
     WalkRequestResDto walkRequestResDto;
     WalkRequest walkRequest;
+    CareGiver careGiver = careGiverRepo.findById(careGiverId).orElseThrow(()->new EntityNotFoundException("CareGiver not found"));
+    DogWalker dogWalker = careGiver.getDogWalker();
 
     if(walkRequestReqDto instanceof OTWalkReqDto){
       walkRequest = oneTimeWalkMapper.toOneTimeWalkReq((OTWalkReqDto) walkRequestReqDto);
+      walkRequest.setDogWalker(dogWalker);
       walkRequestResDto = oneTimeWalkMapper.toOneTimeWalkResDto((OneTimeWalk) walkRequestRepo.save(walkRequest));
+      careGiverRepo.save(careGiver);
     }
 
     else if(walkRequestReqDto instanceof RecWalkReqDto){
       walkRequest = recurringWalkMapper.toRecurringWalkReq((RecWalkReqDto) walkRequestReqDto);
+      walkRequest.setDogWalker(dogWalker);
       walkRequestResDto = recurringWalkMapper.toRecurringWalkResDto((RecurringWalk) walkRequestRepo.save(walkRequest));
+      careGiverRepo.save(careGiver);
     }
 
     else

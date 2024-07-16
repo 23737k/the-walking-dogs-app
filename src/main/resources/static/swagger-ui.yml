@@ -1,0 +1,408 @@
+openapi: 3.0.0
+info:
+  title: The Walking Dogs App
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api/v1
+tags:
+  - name: CareGiver
+  - name: DogWalkerService
+  - name: WalkRequest
+paths:
+  /careGivers:
+    get:
+      tags:
+        - CareGiver
+      summary: Get CareGivers
+      description: >-
+        Gets a list of CareGivers.  
+
+        If there isn´t any filter applied, it will retrieve all the
+        caregivers.  
+
+        There are two types of search criteria, each indicated by the _type_
+        attribute:
+
+
+        **recurring** : Used when the desired type of walk is recurring. You
+        indicate the desired days of the week and you will receive a list of
+        caregivers available on those week days.
+
+
+        **one-time:** Used when the desired type of walk is a one-time
+        ocurrence. You indicate the desired days and you will receive a list of
+        caregivers available on those days.
+
+
+        Example:
+
+
+        ```
+
+        type: recurring
+
+        minRatePerWalk: 15
+
+        maxRatePerWalk: 60
+
+        dogSizes: S
+
+        dogSizes: L
+
+        weekDays: FRIDAY
+
+        weekDays: SATURDAY
+
+        weekDays: SUNDAY
+
+         ```
+
+        ```
+
+        type: one-time
+
+        minRatePerWalk: 15
+
+        maxRatePerWalk: 60
+
+        dogSizes: S
+
+        dogSizes: L
+
+        dates: 2024-08-15
+
+        dates: 2024-08-16
+
+        dates: 2024-08-17
+
+        dates: 2024-08-18
+
+         ```
+      parameters:
+        - name: type
+          in: query
+          schema:
+            type: string
+          description: 'Values: recurring, one-time'
+          example: recurring
+        - name: minRatePerWalk
+          in: query
+          schema:
+            type: integer
+          example: '15'
+        - name: maxRatePerWalk
+          in: query
+          schema:
+            type: integer
+          example: '60'
+        - name: dogSizes
+          in: query
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum: [S,M,L,XL]
+          description: |-
+            A list of dog sizes
+          style: form
+          explode: true
+        - name: weekDays
+          in: query
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum: [MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]
+          description: a list of days of the week
+          style: form
+          explode: true
+        - name: dates
+          in: query
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              example: 2024-08-15
+          description: a list of dates in YYYY-MM-DD format
+
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - CareGiver
+      summary: Post CareGiver
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                basicInfo:
+                  firstname: Kenti
+                  lastname: Antezana
+                  dob: '1997-07-23'
+                  phoneNumber: '123456789'
+                  email: unMail@gmail.com
+                bio: The typical Lorem Ipsum...
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - CareGiver
+      summary: Delete all CareGivers
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /careGivers/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: CareGiver id
+        schema:
+          type: string
+      tags:
+        - CareGiver
+      summary: Get CareGiver by Id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - CareGiver
+      parameters:
+        - name: id
+          description: CareGiver ID
+          in: path
+          schema:
+            type: string
+          required: true
+      summary: Delete CareGiver by ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /careGivers/{careGiverId}/dogWalkerService:
+    get:
+      tags:
+        - DogWalkerService
+      summary: Get DogWalkerService
+      parameters:
+        - name: careGiverId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /careGivers/dogWalkerService:
+    get:
+      tags:
+        - DogWalkerService
+      summary: Get All DogWalkers
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /careGivers/{id}/dogWalkerService:
+    put:
+      tags:
+        - DogWalkerService
+      parameters:
+        - name: careGiverId
+          in: path
+          description: CareGiver ID
+          schema:
+            type: string
+          required: true
+      summary: Put DogWalker
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                schedule:
+                  dailyAvailabilities:
+                    - weekDay: MONDAY
+                      timeSlots:
+                        - MORNING
+                        - AFTERNOON
+                    - weekDay: TUESDAY
+                      timeSlots:
+                        - MORNING
+                        - AFTERNOON
+                ratePerWalk: 15
+                dogSizesAllowed:
+                  - S
+                  - M
+                serviceRadius: 5
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Length:
+              schema:
+                type: integer
+                example: '0'
+            Date:
+              schema:
+                type: string
+                example: Sat, 06 Jul 2024 00:42:18 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: null
+  /careGivers/{careGiverId}/dogWalkerService/walkRequests:
+    post:
+      tags:
+        - WalkRequest
+      summary: Post WalkRequest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              example1:
+                value:
+                  type: one-time
+                  pets:
+                    - name: Sol
+                      breed: mixed breed
+                      weighInKg: 20
+                      sex: FEMALE
+                      age: 8
+                    - name: Lola
+                      breed: mixed breed
+                      weighInKg: 10
+                      sex: FEMALE
+                      age: 12
+                  phoneNumber: '123456789'
+                  message: Las chicas comen 2 veces al dia
+                  walksPerDates:
+                    - date: '2024-07-13'
+                      walkingHours:
+                        - '15:00:00'
+                        - '21:00:00'
+                    - date: '2024-07-14'
+                      walkingHours:
+                        - '15:00:00'
+                        - '21:00:00'
+              example2:
+                value:
+                  type: recurring
+                  pets:
+                    - name: Sol
+                      breed: mixed breed
+                      weighInKg: 20
+                      sex: FEMALE
+                      age: 8
+                    - name: Lola
+                      breed: mixed breed
+                      weighInKg: 10
+                      sex: FEMALE
+                      age: 12
+                  phoneNumber: '123456789'
+                  message: Las chicas comen 2 veces al dia
+                  startOfService: 2024-08-15
+                  endOfService: 2024-09-15
+                  walksPerWeekDays:
+                    - weekDay: 'MONDAY'
+                      walkingHours:
+                        - '14:30:00'
+                        - '21:00:00'
+                    - weekDay: 'TUESDAY'
+                      walkingHours:
+                        - '15:00:00'
+                        - '22:00:00'
+      parameters:
+        - name: careGiverId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - WalkRequest
+      summary: Delete All WalkRequests
+      parameters:
+        - name: careGiverId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - WalkRequest
+      summary: Get WalkRequests
+      parameters:
+        - name: careGiverId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /careGivers/{careGiverId}/dogWalkerService/walkRequests/{walkRequestId}:
+    delete:
+      tags:
+        - WalkRequest
+      summary: Delete WalkRequest By Id
+      parameters:
+        - name: careGiverId
+          in: path
+          schema:
+            type: string
+          required: true
+        - name: walkRequestId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
