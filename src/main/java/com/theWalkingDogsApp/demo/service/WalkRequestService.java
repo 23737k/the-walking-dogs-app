@@ -86,5 +86,4 @@ public class WalkRequestService {
   public void deleteAllWalkRequests(Integer dogWalkerId){
     walkRequestRepo.deleteAllByDogWalkerId(dogWalkerId);
   }
-
 }

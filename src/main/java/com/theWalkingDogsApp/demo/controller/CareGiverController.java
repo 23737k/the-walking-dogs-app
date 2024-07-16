@@ -25,7 +25,7 @@ public class CareGiverController {
   private final CareGiverService careGiverService;
 
   @GetMapping
-  public ResponseEntity<?> getCareGivers(@ModelAttribute CareGiverFilter careGiverFilter) {
+  public ResponseEntity<?> getCareGivers(@ModelAttribute @Validated CareGiverFilter careGiverFilter) {
     return new ResponseEntity<>(careGiverService.getCareGivers(careGiverFilter), HttpStatus.OK);
   }
   @GetMapping("/{id}")

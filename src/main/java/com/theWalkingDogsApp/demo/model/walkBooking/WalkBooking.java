@@ -1,15 +1,7 @@
 package com.theWalkingDogsApp.demo.model.walkBooking;
 
-import com.theWalkingDogsApp.demo.model.careGiver.DogWalker;
 import com.theWalkingDogsApp.demo.model.walkRequest.Pet;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -26,17 +18,14 @@ public class WalkBooking {
     private List<Pet> pets;
     private String phoneNumber;
     private String message;
-    @ManyToOne
-    private DogWalker dogWalker;
     @OneToMany
     @JoinColumn(name = "walk_booking_id")
     private List<Walk> walks;
 
-    public WalkBooking(List<Pet> pets, String phoneNumber, String message, DogWalker dogWalker, List<Walk> walks) {
+    public WalkBooking(List<Pet> pets, String phoneNumber, String message, List<Walk> walks) {
         this.pets = pets;
         this.phoneNumber = phoneNumber;
         this.message = message;
-        this.dogWalker = dogWalker;
         this.walks = walks;
     }
 }
