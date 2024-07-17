@@ -406,3 +406,42 @@ paths:
           description: Successful response
           content:
             application/json: {}
+  /careGivers/{careGiverId}/dogWalkerService/walkBookings:
+    get:
+      tags:
+        - WalkBookings
+      summary: Gets all Walk Booking
+      parameters:
+        - name: careGiverId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: { }
+    post:
+      tags:
+        - WalkBookings
+      summary: Create a new Walk Booking
+      parameters:
+        - name: careGiverId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                walkRequestId: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: { }
+
