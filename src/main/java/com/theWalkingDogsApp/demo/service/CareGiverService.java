@@ -70,5 +70,8 @@ public class CareGiverService {
     return careGiverRepo.findById(id).orElseThrow(()->new EntityNotFoundException("CareGiver not found"));
   }
 
+  public CareGiver saveCareGiver(CareGiver careGiver){
+    return careGiverRepo.save(careGiver);
+  }
 
 }

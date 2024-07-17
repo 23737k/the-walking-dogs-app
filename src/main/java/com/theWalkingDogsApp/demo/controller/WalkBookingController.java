@@ -8,14 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/careGivers/dogWalkerService/walkBookings")
+@RequestMapping("/api/v1/careGivers/{careGiverId}/dogWalkerService/walkBookings")
 @RequiredArgsConstructor
 public class WalkBookingController {
     private final WalkBookingService walkBookingService;
 
     @GetMapping
-    public ResponseEntity<?> getAllBookings(){
-        return ResponseEntity.ok(walkBookingService.getAllWalkBookings());
+    public ResponseEntity<?> getAllBookings(@PathVariable Integer careGiverId){
+        return ResponseEntity.ok(walkBookingService.getAllWalkBookings(careGiverId));
     }
 
     @GetMapping("/{walkBookingId}")
@@ -24,8 +24,8 @@ public class WalkBookingController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addWalkBooking(@RequestBody WalkBookingReqDto walkBookingReqDto){
-        return ResponseEntity.ok();
+    public ResponseEntity<?> addWalkBooking(@RequestBody WalkBookingReqDto walkBookingReqDto, @PathVariable Integer careGiverId){
+        return ResponseEntity.ok(walkBookingService.addWalkBooking(careGiverId, walkBookingReqDto));
     }
 
 

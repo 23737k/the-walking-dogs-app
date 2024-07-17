@@ -26,7 +26,7 @@ public abstract class WalkRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     protected List<Pet> pets;
     protected String phoneNumber;
     protected String message;

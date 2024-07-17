@@ -18,7 +18,7 @@ public class WalkBooking {
     private List<Pet> pets;
     private String phoneNumber;
     private String message;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "walk_booking_id")
     private List<Walk> walks;
 

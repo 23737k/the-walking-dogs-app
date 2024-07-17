@@ -8,8 +8,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring", uses = {WalksPerDateMapper.class})
 public interface OneTimeWalkMapper {
   OneTimeWalk toOneTimeWalkReq (OTWalkReqDto oneTimeWalkReqDto);
-
   OTWalkResDto toOneTimeWalkResDto (OneTimeWalk oneTimeWalk);
-
 
 }

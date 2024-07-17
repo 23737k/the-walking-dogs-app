@@ -32,7 +32,7 @@ public class OneTimeWalk extends WalkRequest{
 
   @Override
   public WalkBooking createBooking() {
-    return new WalkBooking(this.pets,this.phoneNumber,this.message, this.dogWalker,getWalks());
+    return new WalkBooking(this.pets,this.phoneNumber,this.message,getWalks());
   }
 
   private List<Walk> getWalks(){

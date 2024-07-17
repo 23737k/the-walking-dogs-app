@@ -54,8 +54,6 @@ public class GlobalExceptionHandler {
     String errorMessage = "Invalid type: " + ex.getValue() + " is not a valid value for " + ex.getName();
     return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
   }
-
-
 //  @ExceptionHandler(Exception.class)
 //  public ResponseEntity<?> handleException(Exception e){
 //    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");

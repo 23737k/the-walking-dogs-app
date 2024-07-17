@@ -36,10 +36,10 @@ public class DogWalker {
   private Integer id;
   @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
   private Schedule schedule;
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   @JoinColumn(name="dog_walker_id")
   private List<WalkRequest> walkRequests = new ArrayList<>();
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   @JoinColumn(name = "dog_walker_id")
   private List<WalkBooking> walkBookings = new ArrayList<>();
   private Integer ratePerWalk;
