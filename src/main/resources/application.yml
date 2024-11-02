@@ -2,26 +2,17 @@ spring:
   application:
     name: TheWalkingDogs
   datasource:
-    url: jdbc:mysql://localhost:3306/the_walking_dogs_app?createDatabaseIfNotExist=true #La bd se crea automaticamente si no existe
-    username: root
-    password:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL:jdbc:mysql://localhost:3306/the_walking_dogs_app?createDatabaseIfNotExist=true}  #La bd se crea automaticamente si no existe
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:root}
+
   jpa:
     hibernate:
       ddl-auto: update
-    database: mysql
     show-sql: true
+
 server:
   port: 8080
-
-springdoc:
-  api-docs:
-    enabled: true
-  swagger-ui:
-    enabled: true
-    path: /doc/swagger-ui.html
-    url: /swagger-ui.yml
-  paths-to-match: /api/**
 
 bootstrap:
   number-of-care-givers: 10

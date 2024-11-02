@@ -16,10 +16,10 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class RecurringWalkTest {
-  private List<Pet> pets = new ArrayList<>();
-  private String phoneNumber = "";
-  private String message = "";
-  private DogWalker dogWalker = mock(DogWalker.class);
+  private final List<Pet> pets = new ArrayList<>();
+  private final String phoneNumber = "";
+  private final String message = "";
+  private final DogWalker dogWalker = mock(DogWalker.class);
   private List<WalksPerWeekDay> walksPerWeekDays;
   private LocalDate startOfService;
   private LocalDate endOfService;
