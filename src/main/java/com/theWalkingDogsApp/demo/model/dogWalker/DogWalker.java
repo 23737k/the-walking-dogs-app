@@ -1,6 +1,6 @@
-package com.theWalkingDogsApp.demo.model.careGiver;
+package com.theWalkingDogsApp.demo.model.dogWalker;
 
-import com.theWalkingDogsApp.demo.model.walkRequest.DogSize;
+import com.theWalkingDogsApp.demo.model.pet.DogSize;
 import com.theWalkingDogsApp.demo.model.walkBooking.WalkBooking;
 import com.theWalkingDogsApp.demo.model.walkRequest.WalkRequest;
 import com.theWalkingDogsApp.demo.model.schedule.Schedule;

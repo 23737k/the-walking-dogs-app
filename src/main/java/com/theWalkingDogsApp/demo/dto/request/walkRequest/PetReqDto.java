@@ -1,7 +1,6 @@
 package com.theWalkingDogsApp.demo.dto.request.walkRequest;
 
-import com.theWalkingDogsApp.demo.model.walkRequest.Sex;
-import jakarta.validation.Valid;
+import com.theWalkingDogsApp.demo.model.pet.Sex;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

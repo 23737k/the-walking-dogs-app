@@ -1,7 +1,7 @@
 package com.theWalkingDogsApp.demo.dto.request.careGiver;
 
 import com.theWalkingDogsApp.demo.dto.request.schedule.ScheduleReqDto;
-import com.theWalkingDogsApp.demo.model.walkRequest.DogSize;
+import com.theWalkingDogsApp.demo.model.pet.DogSize;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

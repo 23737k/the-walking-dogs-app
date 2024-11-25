@@ -16,3 +16,6 @@ server:
 
 bootstrap:
   number-of-care-givers: 10
+backend:
+  api:
+    base-path: /api/v1

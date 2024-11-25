@@ -2,10 +2,10 @@ package com.theWalkingDogsApp.demo.filter;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.theWalkingDogsApp.demo.model.careGiver.QDogWalker;
+import com.theWalkingDogsApp.demo.model.dogWalker.QDogWalker;
 import com.theWalkingDogsApp.demo.model.schedule.QSchedule;
 import com.theWalkingDogsApp.demo.model.schedule.WeekDay;
-import com.theWalkingDogsApp.demo.model.walkRequest.DogSize;
+import com.theWalkingDogsApp.demo.model.pet.DogSize;
 import java.time.LocalDate;
 import java.util.List;
 import lombok.AllArgsConstructor;

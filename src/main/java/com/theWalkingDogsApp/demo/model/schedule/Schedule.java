@@ -44,13 +44,6 @@ public class Schedule {
     this.dailyAvailabilities = filterDuplicatedWeekDays(dailyAvailabilities);
     this.unavailableDates = unavailableDates == null ? new HashSet<>() : unavailableDates;
   }
-  public void addUnavailableDate(LocalDate date) {
-    unavailableDates.add(date);
-  }
-
-  public void addDailyAvailability(DailyAvailability dailyAvailability) {
-    dailyAvailabilities.add(dailyAvailability);
-  }
 
   public List<DailyAvailability> filterDuplicatedWeekDays(List<DailyAvailability> dailyAvailabilities){
     if(dailyAvailabilities != null){

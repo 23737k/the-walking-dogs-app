@@ -1,4 +1,4 @@
-package com.theWalkingDogsApp.demo.model.walkRequest;
+package com.theWalkingDogsApp.demo.model.pet;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

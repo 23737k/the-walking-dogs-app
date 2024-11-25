@@ -1,6 +1,6 @@
 package com.theWalkingDogsApp.demo.dto.response.walkRequest;
 
-import com.theWalkingDogsApp.demo.model.walkRequest.Sex;
+import com.theWalkingDogsApp.demo.model.pet.Sex;
 import lombok.Data;
 
 @Data

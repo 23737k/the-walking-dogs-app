@@ -1,6 +1,7 @@
 package com.theWalkingDogsApp.demo.model.walkRequest;
 
-import com.theWalkingDogsApp.demo.model.careGiver.DogWalker;
+import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
+import com.theWalkingDogsApp.demo.model.pet.Pet;
 import com.theWalkingDogsApp.demo.model.walkBooking.WalkBooking;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.DiscriminatorColumn;

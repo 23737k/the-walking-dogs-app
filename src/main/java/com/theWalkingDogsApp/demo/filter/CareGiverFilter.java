@@ -1,13 +1,11 @@
 package com.theWalkingDogsApp.demo.filter;
 
 import com.theWalkingDogsApp.demo.model.schedule.WeekDay;
-import com.theWalkingDogsApp.demo.model.walkRequest.DogSize;
+import com.theWalkingDogsApp.demo.model.pet.DogSize;
 import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;

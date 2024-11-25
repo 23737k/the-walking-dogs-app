@@ -1,6 +1,6 @@
 package com.theWalkingDogsApp.demo.model.walkBooking;
 
-import com.theWalkingDogsApp.demo.model.walkRequest.Pet;
+import com.theWalkingDogsApp.demo.model.pet.Pet;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class OTWalkResDto extends WalkRequestResDto{
+public class OTWalkRes extends WalkRequestRes {
   private List<WalksPerDateDto> walksPerDates;
 
 }

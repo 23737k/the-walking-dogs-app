@@ -4,7 +4,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class WalkRequestResDto {
+public class WalkRequestRes {
   protected Integer id;
   protected List<PetResDto> pets;
   protected String phoneNumber;

@@ -3,10 +3,9 @@ package com.theWalkingDogsApp.demo.service;
 import com.theWalkingDogsApp.demo.dto.request.careGiver.DogWalkerReqDto;
 import com.theWalkingDogsApp.demo.dto.response.careGiver.CareGiverResDto;
 import com.theWalkingDogsApp.demo.dto.request.careGiver.CareGiverReqDto;
-import com.theWalkingDogsApp.demo.dto.response.careGiver.DogWalkerResDto;
+import com.theWalkingDogsApp.demo.dto.response.careGiver.DogWalkerRes;
 import com.theWalkingDogsApp.demo.filter.CareGiverFilter;
-import com.theWalkingDogsApp.demo.model.careGiver.DogWalker;
-import com.theWalkingDogsApp.demo.model.careGiver.CareGiver;
+import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
 import com.theWalkingDogsApp.demo.repository.CareGiverCustom;
 import com.theWalkingDogsApp.demo.repository.CareGiverRepo;
 import com.theWalkingDogsApp.demo.service.mapper.careGiver.CareGiverMapper;
@@ -23,10 +22,10 @@ public class CareGiverService {
   private final CareGiverMapper careGiverMapper;
   private final DogWalkerMapper dogWalkerMapper;
   private final CareGiverCustom careGiverCustom;
-
-  public List<CareGiverResDto> getCareGivers(CareGiverFilter filter){
-    return careGiverCustom.findCareGivers(filter).stream().map(careGiverMapper::toCareGiverResponseDto).toList();
-  }
+//
+//  public List<CareGiverResDto> getCareGivers(CareGiverFilter filter){
+//    return careGiverCustom.findCareGivers(filter).stream().map(careGiverMapper::toCareGiverResponseDto).toList();
+//  }
 
   public CareGiverResDto getCareGiverById(Integer id){
     return careGiverRepo.findById(id).map(careGiverMapper::toCareGiverResponseDto).orElse(null);
@@ -37,8 +36,8 @@ public class CareGiverService {
     return careGiverMapper.toCareGiverResponseDto(careGiver);
   }
 
-  public List<DogWalkerResDto> getAllDogWalkerServices(){
-    return careGiverRepo.findAll().stream().map(CareGiver::getDogWalker).map(dogWalkerMapper::toDogWalkerResponseDto).toList();
+  public List<DogWalkerRes> getAllDogWalkerServices(){
+    return careGiverRepo.findAll().stream().map(CareGiver::getDogWalker).map(dogWalkerMapper::toRes).toList();
   }
 
   public void deleteCareGiver(Integer id){
@@ -54,16 +53,16 @@ public class CareGiverService {
 
   public void setDogWalkerService(Integer id, DogWalkerReqDto dogWalkerReqDto){
     CareGiver careGiver = validate(id);
-    DogWalker updatedDogWalker = dogWalkerMapper.toDogWalker(dogWalkerReqDto);
+    DogWalker updatedDogWalker = dogWalkerMapper.toEntity(dogWalkerReqDto);
     updatedDogWalker.setActive(true);
     updatedDogWalker.setId(careGiver.getDogWalker().getId());
     careGiver.setDogWalker(updatedDogWalker);
     careGiverRepo.save(careGiver);
   }
 
-  public DogWalkerResDto getDogWalker(Integer id){
+  public DogWalkerRes getDogWalker(Integer id){
     CareGiver careGiver = validate(id);
-    return dogWalkerMapper.toDogWalkerResponseDto(careGiver.getDogWalker());
+    return dogWalkerMapper.toRes(careGiver.getDogWalker());
   }
 
   public CareGiver validate(Integer id){

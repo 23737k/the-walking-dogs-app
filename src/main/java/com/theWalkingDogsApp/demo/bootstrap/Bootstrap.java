@@ -1,14 +1,12 @@
 package com.theWalkingDogsApp.demo.bootstrap;
 
 import com.github.javafaker.Faker;
-import com.theWalkingDogsApp.demo.model.careGiver.DogWalker;
-import com.theWalkingDogsApp.demo.model.careGiver.BasicInfo;
-import com.theWalkingDogsApp.demo.model.careGiver.CareGiver;
+import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
 import com.theWalkingDogsApp.demo.model.schedule.DailyAvailability;
 import com.theWalkingDogsApp.demo.model.schedule.Schedule;
 import com.theWalkingDogsApp.demo.model.schedule.TimeSlot;
 import com.theWalkingDogsApp.demo.model.schedule.WeekDay;
-import com.theWalkingDogsApp.demo.model.walkRequest.DogSize;
+import com.theWalkingDogsApp.demo.model.pet.DogSize;
 import com.theWalkingDogsApp.demo.repository.CareGiverRepo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;

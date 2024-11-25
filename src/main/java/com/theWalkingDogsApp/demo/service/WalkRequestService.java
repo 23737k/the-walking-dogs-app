@@ -3,9 +3,8 @@ package com.theWalkingDogsApp.demo.service;
 import com.theWalkingDogsApp.demo.dto.request.walkRequest.OTWalkReqDto;
 import com.theWalkingDogsApp.demo.dto.request.walkRequest.RecWalkReqDto;
 import com.theWalkingDogsApp.demo.dto.request.walkRequest.WalkRequestReqDto;
-import com.theWalkingDogsApp.demo.dto.response.walkRequest.WalkRequestResDto;
-import com.theWalkingDogsApp.demo.model.careGiver.CareGiver;
-import com.theWalkingDogsApp.demo.model.careGiver.DogWalker;
+import com.theWalkingDogsApp.demo.dto.response.walkRequest.WalkRequestRes;
+import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
 import com.theWalkingDogsApp.demo.model.walkRequest.OneTimeWalk;
 import com.theWalkingDogsApp.demo.model.walkRequest.RecurringWalk;
 import com.theWalkingDogsApp.demo.model.walkRequest.WalkRequest;
@@ -30,16 +29,16 @@ public class WalkRequestService {
   private final CareGiverService careGiverService;
 
 
-  public List<WalkRequestResDto> getAll(Integer dogWalkerId) {
+  public List<WalkRequestRes> getAll(Integer dogWalkerId) {
     List<WalkRequest> walkRequests = walkRequestRepo.findAllByDogWalkerId(dogWalkerId);
-    List<WalkRequestResDto> dtos = new ArrayList<>();
+    List<WalkRequestRes> dtos = new ArrayList<>();
 
     for (WalkRequest walkRequest : walkRequests) {
       if (walkRequest instanceof RecurringWalk recurringWalk) {
-        WalkRequestResDto dto = recurringWalkMapper.toRecurringWalkResDto(recurringWalk);
+        WalkRequestRes dto = recurringWalkMapper.toRecurringWalkResDto(recurringWalk);
         dtos.add(dto);
       } else if (walkRequest instanceof OneTimeWalk oneTimeWalk) {
-        WalkRequestResDto dto = oneTimeWalkMapper.toOneTimeWalkResDto(oneTimeWalk);
+        WalkRequestRes dto = oneTimeWalkMapper.toOneTimeWalkResDto(oneTimeWalk);
         dtos.add(dto);
       }
     }
@@ -47,9 +46,9 @@ public class WalkRequestService {
     return dtos;
   }
 
-  public WalkRequestResDto add(Integer careGiverId, WalkRequestReqDto walkRequestReqDto) {
+  public WalkRequestRes add(Integer careGiverId, WalkRequestReqDto walkRequestReqDto) {
 
-    WalkRequestResDto walkRequestResDto;
+    WalkRequestRes walkRequestRes;
     WalkRequest walkRequest;
     CareGiver careGiver = careGiverRepo.findById(careGiverId).orElseThrow(()->new EntityNotFoundException("CareGiver not found"));
     DogWalker dogWalker = careGiver.getDogWalker();
@@ -57,20 +56,20 @@ public class WalkRequestService {
     if(walkRequestReqDto instanceof OTWalkReqDto){
       walkRequest = oneTimeWalkMapper.toOneTimeWalkReq((OTWalkReqDto) walkRequestReqDto);
       walkRequest.setDogWalker(dogWalker);
-      walkRequestResDto = oneTimeWalkMapper.toOneTimeWalkResDto((OneTimeWalk) walkRequestRepo.save(walkRequest));
+      walkRequestRes = oneTimeWalkMapper.toOneTimeWalkResDto((OneTimeWalk) walkRequestRepo.save(walkRequest));
       careGiverRepo.save(careGiver);
     }
 
     else if(walkRequestReqDto instanceof RecWalkReqDto){
       walkRequest = recurringWalkMapper.toRecurringWalkReq((RecWalkReqDto) walkRequestReqDto);
       walkRequest.setDogWalker(dogWalker);
-      walkRequestResDto = recurringWalkMapper.toRecurringWalkResDto((RecurringWalk) walkRequestRepo.save(walkRequest));
+      walkRequestRes = recurringWalkMapper.toRecurringWalkResDto((RecurringWalk) walkRequestRepo.save(walkRequest));
       careGiverRepo.save(careGiver);
     }
 
     else
       throw new IllegalArgumentException("Invalid type of request");
-    return walkRequestResDto;
+    return walkRequestRes;
   }
 
   public void deleteWalkRequest(Integer id) {

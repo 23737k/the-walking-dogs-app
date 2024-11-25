@@ -1,8 +1,7 @@
 package com.theWalkingDogsApp.demo.service;
 
 import com.theWalkingDogsApp.demo.dto.request.walkBooking.WalkBookingReqDto;
-import com.theWalkingDogsApp.demo.model.careGiver.CareGiver;
-import com.theWalkingDogsApp.demo.model.careGiver.DogWalker;
+import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
 import com.theWalkingDogsApp.demo.model.walkBooking.WalkBooking;
 import com.theWalkingDogsApp.demo.model.walkRequest.WalkRequest;
 import com.theWalkingDogsApp.demo.repository.WalkBookingRepo;
@@ -11,7 +10,6 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.List;
 

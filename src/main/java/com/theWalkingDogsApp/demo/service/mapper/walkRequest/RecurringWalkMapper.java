@@ -1,7 +1,7 @@
 package com.theWalkingDogsApp.demo.service.mapper.walkRequest;
 
 import com.theWalkingDogsApp.demo.dto.request.walkRequest.RecWalkReqDto;
-import com.theWalkingDogsApp.demo.dto.response.walkRequest.RecWalkResDto;
+import com.theWalkingDogsApp.demo.dto.response.walkRequest.RecWalkRes;
 import com.theWalkingDogsApp.demo.model.walkRequest.RecurringWalk;
 import org.mapstruct.Mapper;
 
@@ -9,5 +9,5 @@ import org.mapstruct.Mapper;
 public interface RecurringWalkMapper {
   RecurringWalk toRecurringWalkReq(RecWalkReqDto recWalkReqDto);
 
-  RecWalkResDto toRecurringWalkResDto(RecurringWalk recurringWalk);
+  RecWalkRes toRecurringWalkResDto(RecurringWalk recurringWalk);
 }

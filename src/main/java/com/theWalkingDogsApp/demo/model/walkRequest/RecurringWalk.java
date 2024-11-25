@@ -2,15 +2,13 @@ package com.theWalkingDogsApp.demo.model.walkRequest;
 
 import static com.theWalkingDogsApp.demo.model.walkBooking.WalkStatus.SCHEDULED;
 
-import com.theWalkingDogsApp.demo.model.careGiver.DogWalker;
+import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
+import com.theWalkingDogsApp.demo.model.pet.Pet;
 import com.theWalkingDogsApp.demo.model.schedule.WeekDay;
 import com.theWalkingDogsApp.demo.model.walkBooking.Walk;
 import com.theWalkingDogsApp.demo.model.walkBooking.WalkBooking;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
@@ -28,12 +26,12 @@ import lombok.NoArgsConstructor;
 public class RecurringWalk extends WalkRequest{
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "recurring_walk_id")
-    private List<WalksPerWeekDay> walksPerWeekDays;
+    private List<WalkPerWeek> walksPerWeekDays;
     private LocalDate startOfService;
     private LocalDate endOfService;
 
     public RecurringWalk(List<Pet> pets, String phoneNumber, String message, DogWalker dogWalker,
-                         List<WalksPerWeekDay> walksPerWeekDays, LocalDate startOfService, LocalDate endOfService){
+                         List<WalkPerWeek> walksPerWeekDays, LocalDate startOfService, LocalDate endOfService){
         super(pets,phoneNumber,message,dogWalker);
         this.walksPerWeekDays = walksPerWeekDays;
         this.startOfService = startOfService;
@@ -47,11 +45,11 @@ public class RecurringWalk extends WalkRequest{
 
     private List<Walk> getWalks(){
         List<Walk> walks = new ArrayList<>();
-        List<WeekDay> weekDays = this.walksPerWeekDays.stream().map(WalksPerWeekDay::getWeekDay).toList();
+        List<WeekDay> weekDays = this.walksPerWeekDays.stream().map(WalkPerWeek::getWeekDay).toList();
         List<LocalDate> serviceDays = this.startOfService.datesUntil(this.endOfService.plusDays(1))
                 .filter(d-> weekDays.contains(WeekDay.valueOf(d.getDayOfWeek().toString()))).toList();
 
-        for(WalksPerWeekDay walksPerWeekDay :  this.walksPerWeekDays){
+        for(WalkPerWeek walksPerWeekDay :  this.walksPerWeekDays){
             WeekDay weekDay = walksPerWeekDay.getWeekDay();
             List<LocalDate> sameWeekDayDates = serviceDays.stream().filter(d -> hasSameWeekDay(d,weekDay)).toList();
             for(LocalDate sameWeekDayDate : sameWeekDayDates){
