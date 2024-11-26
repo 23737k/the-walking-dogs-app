@@ -1,13 +1,11 @@
 package com.theWalkingDogsApp.demo.model.schedule;
 
 
-import com.querydsl.core.annotations.QueryEmbedded;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;

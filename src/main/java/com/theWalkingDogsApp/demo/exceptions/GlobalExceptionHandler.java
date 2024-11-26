@@ -1,4 +1,4 @@
-package com.theWalkingDogsApp.demo.handler;
+package com.theWalkingDogsApp.demo.exceptions;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import jakarta.persistence.EntityNotFoundException;
@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(EntityNotFoundException.class)
-  public ResponseEntity<String> handleEntityNotFoundException(final EntityNotFoundException e) {
+  public ResponseEntity<String> handleException(final EntityNotFoundException e) {
     return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
   }
 
@@ -44,18 +44,20 @@ public class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(InvalidFormatException.class)
-  public ResponseEntity<Object> handleInvalidFormatException(InvalidFormatException ex, WebRequest request) {
+  public ResponseEntity<Object> handleException(InvalidFormatException ex, WebRequest request) {
     String errorMessage = "Invalid format: " + ex.getValue() + " is not a valid value for " + ex.getTargetType().getSimpleName();
     return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
   }
 
   @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-  public ResponseEntity<Object> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex, WebRequest request) {
+  public ResponseEntity<Object> handleException(MethodArgumentTypeMismatchException ex, WebRequest request) {
     String errorMessage = "Invalid type: " + ex.getValue() + " is not a valid value for " + ex.getName();
     return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
   }
-//  @ExceptionHandler(Exception.class)
-//  public ResponseEntity<?> handleException(Exception e){
-//    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
-//  }
+
+  @ExceptionHandler(UserAlreadyExistsException.class)
+  public ResponseEntity<Object> handleException(UserAlreadyExistsException ex) {
+    return ResponseEntity.badRequest().body(ex.getMessage());
+  }
+
 }

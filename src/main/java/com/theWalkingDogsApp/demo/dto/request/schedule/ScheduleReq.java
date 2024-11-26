@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ScheduleReqDto {
+public class ScheduleReq {
   @NotEmpty
   @Valid
-  private List<DailyAvailabilityReqDto> dailyAvailabilities;
+  private List<DailyAvailabilityReq> dailyAvailabilities;
   @NotEmpty(message = "unavailableDates field must not be empty")
   private List<LocalDate> unavailableDates;
 }

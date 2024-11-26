@@ -1,6 +1,6 @@
 package com.theWalkingDogsApp.demo.dto.request.careGiver;
 
-import com.theWalkingDogsApp.demo.dto.request.schedule.ScheduleReqDto;
+import com.theWalkingDogsApp.demo.dto.request.schedule.ScheduleReq;
 import com.theWalkingDogsApp.demo.model.pet.DogSize;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class DogWalkerReqDto {
+public class DogWalkerReq {
   @Valid
   @NotNull(message = "schedule field must not be null")
-  private ScheduleReqDto schedule;
+  private ScheduleReq schedule;
   @NotNull(message = "ratePerWalk field must not be null")
   @Positive(message = "ratePerWalk field must be a positive number")
   private Integer ratePerWalk;

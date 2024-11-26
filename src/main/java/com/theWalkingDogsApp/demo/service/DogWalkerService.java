@@ -1,6 +1,8 @@
 package com.theWalkingDogsApp.demo.service;
 
+import com.theWalkingDogsApp.demo.dto.request.careGiver.DogWalkerReq;
 import com.theWalkingDogsApp.demo.dto.response.careGiver.DogWalkerRes;
+import com.theWalkingDogsApp.demo.model.user.User;
 import com.theWalkingDogsApp.demo.repository.DogWalkerRepo;
 import com.theWalkingDogsApp.demo.service.mapper.careGiver.DogWalkerMapper;
 import jakarta.persistence.EntityNotFoundException;
@@ -19,9 +21,12 @@ public class DogWalkerService {
         return dogWalkerRepo.findAll().stream().map(dogWalkerMapper::toRes).toList();
     }
 
-
     public DogWalkerRes getDogWalkerById(Integer id) {
         return dogWalkerMapper.toRes(dogWalkerRepo.findById(id)
                 .orElseThrow(()-> new EntityNotFoundException("Dog walker with id: " + id + " not found")));
+    }
+
+    public DogWalkerRes updateDogWalker( DogWalkerReq dogWalkerReq) {
+        return null;
     }
 }
