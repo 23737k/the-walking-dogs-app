@@ -1,23 +1,26 @@
 package com.theWalkingDogsApp.demo.service.mapper.walkRequest;
 
+import com.theWalkingDogsApp.demo.dto.request.walkRequest.OneTimeWalkReq;
+import com.theWalkingDogsApp.demo.dto.request.walkRequest.RecurringWalkReq;
+import com.theWalkingDogsApp.demo.dto.request.walkRequest.WalkRequestReq;
+import com.theWalkingDogsApp.demo.dto.response.walkRequest.OneTimeWalkRes;
+import com.theWalkingDogsApp.demo.dto.response.walkRequest.RecurringWalkRes;
 import com.theWalkingDogsApp.demo.dto.response.walkRequest.WalkRequestRes;
 import com.theWalkingDogsApp.demo.model.walkRequest.OneTimeWalk;
 import com.theWalkingDogsApp.demo.model.walkRequest.RecurringWalk;
 import com.theWalkingDogsApp.demo.model.walkRequest.WalkRequest;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
+import org.mapstruct.SubclassMapping;
 
-@Mapper(componentModel = "spring", uses = {RecurringWalkMapper.class, OneTimeWalkMapper.class})
+import static org.mapstruct.SubclassExhaustiveStrategy.RUNTIME_EXCEPTION;
+
+@Mapper(componentModel = "spring", subclassExhaustiveStrategy = RUNTIME_EXCEPTION)
 public interface WalkRequestMapper {
+  @SubclassMapping(source = RecurringWalk.class, target = RecurringWalkRes.class)
+  @SubclassMapping(source = OneTimeWalk.class, target = OneTimeWalkRes.class)
+  WalkRequestRes toRes(WalkRequest walkRequest);
 
-  default WalkRequestRes toWalkRequestResDto(WalkRequest walkRequest) {
-    if (walkRequest instanceof OneTimeWalk) {
-      return Mappers.getMapper(OneTimeWalkMapper.class).toOneTimeWalkResDto((OneTimeWalk) walkRequest);
-
-    } else if (walkRequest instanceof RecurringWalk) {
-      return Mappers.getMapper(RecurringWalkMapper.class).toRecurringWalkResDto((RecurringWalk) walkRequest);
-    }
-    throw new IllegalArgumentException("Unknown type: " + walkRequest.getClass().getName());
-  }
-
+  @SubclassMapping(target = RecurringWalk.class, source = RecurringWalkReq.class)
+  @SubclassMapping(target = OneTimeWalk.class, source = OneTimeWalkReq.class)
+  WalkRequest toEntity(WalkRequestReq req);
 }

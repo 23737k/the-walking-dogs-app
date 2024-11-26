@@ -5,12 +5,8 @@ import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-/**
- *  Response Dto for OneTimeWalk class
- */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class OTWalkRes extends WalkRequestRes {
+public class OneTimeWalkRes extends WalkRequestRes {
   private List<WalksPerDateDto> walksPerDates;
-
 }

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class RecWalkReqDto extends WalkRequestReqDto {
+public class RecurringWalkReq extends WalkRequestReq {
   @Valid
   @NotEmpty(message = "walksPerWeekDays field must not be empty")
   private List<WalksPerWeekDayDto> walksPerWeekDays;

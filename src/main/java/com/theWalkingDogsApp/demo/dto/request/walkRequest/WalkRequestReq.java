@@ -15,14 +15,14 @@ import lombok.NoArgsConstructor;
     property = "type"
 )
 @JsonSubTypes({
-    @JsonSubTypes.Type(value = OTWalkReqDto.class, name = "one-time"),
-    @JsonSubTypes.Type(value = RecWalkReqDto.class, name = "recurring")
+    @JsonSubTypes.Type(value = OneTimeWalkReq.class, name = "one-time"),
+    @JsonSubTypes.Type(value = RecurringWalkReq.class, name = "recurring")
 })
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class WalkRequestReqDto {
+public class WalkRequestReq {
   @Valid
   @NotEmpty(message = "pets field must not be empty")
   protected List<PetReqDto> pets;

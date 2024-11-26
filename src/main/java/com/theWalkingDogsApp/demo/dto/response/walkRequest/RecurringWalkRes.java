@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class RecWalkRes extends WalkRequestRes {
+public class RecurringWalkRes extends WalkRequestRes {
   private List<WalksPerWeekDayDto> walksPerWeekDays;
   private LocalDate startOfService;
   private LocalDate endOfService;
