@@ -35,15 +35,13 @@ public class WalkRequestController {
   }
 
   @DeleteMapping("/{walkRequestId}")
-  public ResponseEntity<?> deleteWalkRequest(@PathVariable Integer careGiverId, @PathVariable Integer walkRequestId) {
-    walkRequestService.validate(careGiverId);
+  public ResponseEntity<?> deleteWalkRequest(@PathVariable Integer walkRequestId) {
     walkRequestService.deleteWalkRequest(walkRequestId);
     return ResponseEntity.noContent().build();
   }
   @DeleteMapping
-  public ResponseEntity<?> deleteAllWalkRequests(@PathVariable Integer careGiverId) {
-    Integer dogWalkerId = walkRequestService.validate(careGiverId).getDogWalker().getId();
-    walkRequestService.deleteAllWalkRequests(dogWalkerId);
+  public ResponseEntity<?> deleteAllWalkRequests(Principal principal) {
+    walkRequestService.deleteAllWalkRequests(getUser(principal));
     return ResponseEntity.noContent().build();
   }
 

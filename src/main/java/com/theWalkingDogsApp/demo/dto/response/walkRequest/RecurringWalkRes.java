@@ -1,6 +1,6 @@
 package com.theWalkingDogsApp.demo.dto.response.walkRequest;
 
-import com.theWalkingDogsApp.demo.dto.request.walkRequest.WalksPerWeekDayDto;
+import com.theWalkingDogsApp.demo.dto.request.walkRequest.WalksPerWeekDayReq;
 import java.time.LocalDate;
 import java.util.List;
 import lombok.Data;
@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class RecurringWalkRes extends WalkRequestRes {
-  private List<WalksPerWeekDayDto> walksPerWeekDays;
+  private List<WalksPerWeekDayReq> walksPerWeekDays;
   private LocalDate startOfService;
   private LocalDate endOfService;
 }

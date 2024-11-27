@@ -7,59 +7,45 @@ import com.theWalkingDogsApp.demo.model.walkRequest.WalkRequest;
 import com.theWalkingDogsApp.demo.repository.WalkRequestRepo;
 import com.theWalkingDogsApp.demo.service.mapper.walkRequest.WalkRequestMapper;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class WalkRequestService {
   private final WalkRequestRepo walkRequestRepo;
   private final WalkRequestMapper mapper;
 
 
   public List<WalkRequestRes> getAll(User user) {
-//    List<WalkRequest> walkRequests = walkRequestRepo.findAll();
     List<WalkRequest> walkRequests = walkRequestRepo.findAllByUser(user);
     return walkRequests.stream().map(mapper::toRes).toList();
   }
 
+  @Transactional
   public WalkRequestRes add(User user, WalkRequestReq req) {
-    WalkRequest walkRequest = mapper.toEntity(req);
+    var walkRequest = mapper.toEntity(req);
+    walkRequest.setDogWalker(user.getDogWalker());
     return  mapper.toRes(walkRequestRepo.save(walkRequest));
-//
-//    if(walkRequestReqDto instanceof OTWalkReqDto){
-//      walkRequest = oneTimeWalkMapper.toOneTimeWalkReq((OTWalkReqDto) walkRequestReqDto);
-//      walkRequest.setDogWalker(dogWalker);
-//      walkRequestRes = oneTimeWalkMapper.toOneTimeWalkResDto((OneTimeWalk) walkRequestRepo.save(walkRequest));
-//      careGiverRepo.save(careGiver);
-//    }
-//
-//    else if(walkRequestReqDto instanceof RecWalkReqDto){
-//      walkRequest = recurringWalkMapper.toRecurringWalkReq((RecWalkReqDto) walkRequestReqDto);
-//      walkRequest.setDogWalker(dogWalker);
-//      walkRequestRes = recurringWalkMapper.toRecurringWalkResDto((RecurringWalk) walkRequestRepo.save(walkRequest));
-//      careGiverRepo.save(careGiver);
-//    }
-//
-//    else
-//      throw new IllegalArgumentException("Invalid type of request");
-//    return walkRequestRes;
   }
 
   public void deleteWalkRequest(Integer id) {
-    validate(id);
+    if(!walkRequestRepo.existsById(id))
+      throw new EntityNotFoundException("WalkRequest with id " + id + " not found");
     walkRequestRepo.deleteById(id);
   }
 
-  public WalkRequest validate(Integer id){
-    return walkRequestRepo.findById(id).orElseThrow(()-> new EntityNotFoundException("WalkRequest with id " + id + " not found"));
+  @Transactional
+  public void deleteAllWalkRequests(User user){
+    walkRequestRepo.deleteAllByDogWalkerId(user.getDogWalker().getId());
   }
 
-  @Transactional
-  public void deleteAllWalkRequests(Integer dogWalkerId){
-    walkRequestRepo.deleteAllByDogWalkerId(dogWalkerId);
+  boolean isEmpty(){
+    return walkRequestRepo.count() == 0;
   }
+
 }

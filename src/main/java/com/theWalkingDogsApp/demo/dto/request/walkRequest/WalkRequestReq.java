@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
     property = "type"

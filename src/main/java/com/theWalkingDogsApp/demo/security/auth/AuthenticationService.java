@@ -13,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +24,7 @@ public class AuthenticationService {
   private final UserService userService;
   private final PasswordEncoder passwordEncoder;
 
+  @Transactional
   public AuthRes authenticate(AuthReq authReq) {
     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(authReq.getEmail(),authReq.getPassword());
     UserDetails userDetails = (UserDetails) authenticationProvider.authenticate(authentication).getPrincipal();
@@ -32,11 +34,19 @@ public class AuthenticationService {
     return new AuthRes(token.getToken());
   }
 
-  public AuthRes register(RegisterReq registerReq) {
-    if(userService.userExists(registerReq.getEmail()))
+  @Transactional
+  public AuthRes register(RegisterReq req) {
+    if(userService.userExists(req.getEmail()))
       throw new UserAlreadyExistsException("This email is already registered");
 
-    User user = new User(registerReq.getEmail(), passwordEncoder.encode(registerReq.getPassword()), new UserProfile());
+    UserProfile userProfile = UserProfile.builder()
+        .firstname(req.getFirstname())
+        .lastname(req.getLastname())
+        .dob(req.getDob())
+        .phoneNumber(req.getPhoneNumber())
+        .build();
+
+    User user = new User(req.getEmail(), passwordEncoder.encode(req.getPassword()), userProfile);
     user = userService.save(user);
 
     Token token = new Token(jwtService.getAccessToken(user));

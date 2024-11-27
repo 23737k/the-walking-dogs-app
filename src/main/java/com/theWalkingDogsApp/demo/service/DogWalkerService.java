@@ -29,4 +29,8 @@ public class DogWalkerService {
     public DogWalkerRes updateDogWalker( DogWalkerReq dogWalkerReq) {
         return null;
     }
+
+    public boolean isEmpty(){
+        return dogWalkerRepo.count() == 0;
+    }
 }

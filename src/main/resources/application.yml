@@ -15,7 +15,7 @@ server:
   port: 8080
 
 bootstrap:
-  number-of-care-givers: 10
+  number-of-dog-walkers: 25
 backend:
   api:
     base-path: /api/v1

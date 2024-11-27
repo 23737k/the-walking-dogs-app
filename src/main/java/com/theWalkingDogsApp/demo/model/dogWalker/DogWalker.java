@@ -48,6 +48,8 @@ public class DogWalker {
   @Column(name = "dogSize")
   private Set<DogSize> dogSizesAllowed =  new HashSet<>();
   private Integer serviceRadius;
+  @Column(length = 512)
+  private String bio;
   private boolean isActive = false;
 
 }

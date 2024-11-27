@@ -10,6 +10,7 @@ import com.theWalkingDogsApp.demo.model.walkRequest.OneTimeWalk;
 import com.theWalkingDogsApp.demo.model.walkRequest.RecurringWalk;
 import com.theWalkingDogsApp.demo.model.walkRequest.WalkRequest;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.SubclassMapping;
 
 import static org.mapstruct.SubclassExhaustiveStrategy.RUNTIME_EXCEPTION;
@@ -18,6 +19,7 @@ import static org.mapstruct.SubclassExhaustiveStrategy.RUNTIME_EXCEPTION;
 public interface WalkRequestMapper {
   @SubclassMapping(source = RecurringWalk.class, target = RecurringWalkRes.class)
   @SubclassMapping(source = OneTimeWalk.class, target = OneTimeWalkRes.class)
+  @Mapping(source = "dogWalker.id", target = "dogWalkerId")
   WalkRequestRes toRes(WalkRequest walkRequest);
 
   @SubclassMapping(target = RecurringWalk.class, source = RecurringWalkReq.class)

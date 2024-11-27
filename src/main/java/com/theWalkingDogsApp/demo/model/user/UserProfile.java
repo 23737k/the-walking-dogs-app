@@ -22,7 +22,6 @@ public class UserProfile {
     private Integer id;
     private String firstname;
     private String lastname;
-    private String email;
     private String phoneNumber;
     private LocalDate dob;
 }

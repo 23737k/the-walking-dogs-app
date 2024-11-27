@@ -26,8 +26,8 @@ public class User implements UserDetails {
     private String password;
     @OneToOne(cascade = CascadeType.ALL)
     private UserProfile profile;
-    @OneToOne
-    private DogWalker dogWalker;
+    @OneToOne(cascade = CascadeType.ALL)
+    private DogWalker dogWalker = new DogWalker();
 
     public User(String email, String password, UserProfile profile) {
         this.email = email;

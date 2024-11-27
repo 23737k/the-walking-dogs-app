@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class RecurringWalkReq extends WalkRequestReq {
   @Valid
   @NotEmpty(message = "walksPerWeekDays field must not be empty")
-  private List<WalksPerWeekDayDto> walksPerWeekDays;
+  private List<WalksPerWeekDayReq> walksPerWeekDays;
   @NotNull(message = "startOfService field must not be empty")
   private LocalDate startOfService;
   @NotNull(message = "endOfService field must not be empty")

@@ -13,5 +13,5 @@ import lombok.NoArgsConstructor;
 public class OneTimeWalkReq extends WalkRequestReq {
   @NotEmpty(message = "walksPerDates field must not be empty")
   @Valid
-  private List<WalksPerDateDto> walksPerDates;
+  private List<WalksPerDaterRes> walksPerDate;
 }
