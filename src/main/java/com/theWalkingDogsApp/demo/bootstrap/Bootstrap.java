@@ -2,30 +2,23 @@ package com.theWalkingDogsApp.demo.bootstrap;
 
 import com.github.javafaker.Faker;
 import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
+import com.theWalkingDogsApp.demo.model.pet.DogSize;
 import com.theWalkingDogsApp.demo.model.schedule.DailyAvailability;
 import com.theWalkingDogsApp.demo.model.schedule.Schedule;
 import com.theWalkingDogsApp.demo.model.schedule.TimeSlot;
 import com.theWalkingDogsApp.demo.model.schedule.WeekDay;
-import com.theWalkingDogsApp.demo.model.pet.DogSize;
 import com.theWalkingDogsApp.demo.model.user.User;
 import com.theWalkingDogsApp.demo.model.user.UserProfile;
-import com.theWalkingDogsApp.demo.repository.DogWalkerRepo;
 import com.theWalkingDogsApp.demo.repository.UserRepository;
 import com.theWalkingDogsApp.demo.service.DogWalkerService;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.*;
 
 @Component
 @RequiredArgsConstructor

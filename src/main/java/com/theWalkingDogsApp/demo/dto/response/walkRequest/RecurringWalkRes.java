@@ -1,10 +1,11 @@
 package com.theWalkingDogsApp.demo.dto.response.walkRequest;
 
 import com.theWalkingDogsApp.demo.dto.request.walkRequest.WalksPerWeekDayReq;
-import java.time.LocalDate;
-import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Response Dto for RecurringWalk class

@@ -4,7 +4,7 @@ import com.theWalkingDogsApp.demo.model.pet.Sex;
 import lombok.Data;
 
 @Data
-public class PetResDto {
+public class PetRes {
   private Integer id;
   private String name;
   private String breed;

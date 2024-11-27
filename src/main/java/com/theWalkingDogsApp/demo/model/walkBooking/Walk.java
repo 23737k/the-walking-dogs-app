@@ -1,9 +1,6 @@
 package com.theWalkingDogsApp.demo.model.walkBooking;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +16,7 @@ public class Walk {
     private Integer id;
     private LocalDate date;
     private LocalTime time;
+    @Enumerated(EnumType.STRING)
     private WalkStatus status;
 
     public Walk(LocalDate date, LocalTime time, WalkStatus status) {

@@ -1,7 +1,7 @@
 package com.theWalkingDogsApp.demo.service;
 
 import com.theWalkingDogsApp.demo.dto.request.careGiver.DogWalkerReq;
-import com.theWalkingDogsApp.demo.dto.response.careGiver.DogWalkerRes;
+import com.theWalkingDogsApp.demo.dto.response.dogWalker.DogWalkerRes;
 import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
 import com.theWalkingDogsApp.demo.repository.DogWalkerRepo;
 import com.theWalkingDogsApp.demo.service.mapper.dogWalker.DogWalkerMapper;

@@ -1,49 +1,51 @@
 package com.theWalkingDogsApp.demo.service;
 
-import com.theWalkingDogsApp.demo.dto.request.walkBooking.WalkBookingReqDto;
+import com.theWalkingDogsApp.demo.dto.request.walkBooking.WalkBookingReq;
+import com.theWalkingDogsApp.demo.dto.response.walkBooking.WalkBookingRes;
+import com.theWalkingDogsApp.demo.model.dogOwner.DogOwner;
 import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
+import com.theWalkingDogsApp.demo.model.user.User;
 import com.theWalkingDogsApp.demo.model.walkBooking.WalkBooking;
 import com.theWalkingDogsApp.demo.model.walkRequest.WalkRequest;
 import com.theWalkingDogsApp.demo.repository.WalkBookingRepo;
-import com.theWalkingDogsApp.demo.repository.WalkRequestRepo;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
+import com.theWalkingDogsApp.demo.service.mapper.walkBooking.WalkBookingMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-//@Service
-//@RequiredArgsConstructor
-//public class WalkBookingService {
-//    private final WalkBookingRepo walkBookingRepo;
-//    private final WalkRequestRepo walkRequestRepo;
-//
-//    public List<WalkBooking> getAllWalkBookings(Integer careGiverId){
-//        CareGiver careGiver = careGiverService.validate(careGiverId);
-//        return careGiver.getDogWalker().getWalkBookings();
-//    }
-//
+@Service
+@RequiredArgsConstructor
+public class WalkBookingService {
+    private final WalkBookingRepo repo;
+    private final WalkBookingMapper mapper;
+    private final WalkRequestService walkRequestService;
+
+    @Transactional(readOnly = true)
+    public List<WalkBookingRes> getDogWalkerBookings(User user) {
+        DogWalker dogWalker = user.getDogWalker();
+        return repo.findWalkBookingByDogWalker(dogWalker).stream().map(mapper::toRes).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<WalkBookingRes> getDogOwnerBookings(User user) {
+        DogOwner dogOwner = user.getDogOwner();
+        return repo.findWalkBookingByDogOwner(dogOwner).stream().map(mapper::toRes).toList();
+
+    }
+
+    @Transactional
+    public WalkBookingRes addWalkBooking(User user, WalkBookingReq req) {
+        WalkRequest walkRequest = walkRequestService.findById(req.getWalkRequestId());
+        WalkBooking walkBooking = walkRequest.createBooking();
+        walkRequestService.deleteWalkRequest(user, walkRequest.getId());
+        return mapper.toRes(repo.save(walkBooking));
+    }
+
+
 //    public WalkBooking getWalkBookingById(Integer id){
-//        return walkBookingRepo.findById(id).orElseThrow(()->new EntityNotFoundException("Walk Booking with ID "+ id + " does not exist" ));
+//        return repo.findById(id).orElseThrow(()->new EntityNotFoundException("Walk Booking with ID "+ id + " does not exist" ));
 //    }
-//
-//
-//    @Transactional
-//    public WalkBooking addWalkBooking(Integer careGiverId, WalkBookingReqDto walkBookingReqDto) {
-//        CareGiver careGiver = careGiverService.validate(careGiverId);
-//        DogWalker dogWalker = careGiver.getDogWalker();
-//        Integer walkRequestId = walkBookingReqDto.getWalkRequestId();
-//        WalkRequest walkRequest = walkRequestRepo.findById(walkRequestId)
-//            .orElseThrow(() -> new EntityNotFoundException("Walk Request " + walkRequestId + " does not exist"));
-//
-//        WalkBooking walkBooking = walkBookingRepo.save(walkRequest.createBooking());
-//        dogWalker.getWalkRequests().remove(walkRequest);
-//        dogWalker.getWalkBookings().add(walkBooking);
-//        careGiverService.saveCareGiver(careGiver);
-//        return walkBookingRepo.save(walkBooking);
-//    }
-//
-//
-//
-//}
+
+}

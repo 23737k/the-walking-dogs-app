@@ -1,20 +1,21 @@
 package com.theWalkingDogsApp.demo;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-
 import com.theWalkingDogsApp.demo.model.dogOwner.DogOwner;
 import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
+import com.theWalkingDogsApp.demo.model.pet.Pet;
 import com.theWalkingDogsApp.demo.model.walkBooking.WalkBooking;
 import com.theWalkingDogsApp.demo.model.walkRequest.OneTimeWalk;
-import com.theWalkingDogsApp.demo.model.pet.Pet;
 import com.theWalkingDogsApp.demo.model.walkRequest.WalkPerDate;
+import org.junit.jupiter.api.Test;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
 
 public class OneTimeWalkTest {
 

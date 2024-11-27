@@ -1,11 +1,8 @@
 package com.theWalkingDogsApp.demo.security.config;
 
 import com.theWalkingDogsApp.demo.exceptions.TokenNotFoundException;
-import com.theWalkingDogsApp.demo.security.jwt.JwtAuthFilter;
 import com.theWalkingDogsApp.demo.security.token.TokenService;
 import com.theWalkingDogsApp.demo.service.UserService;
-import jakarta.servlet.ServletException;
-import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
+
+import java.io.IOException;
 
 @RequiredArgsConstructor
 @Configuration

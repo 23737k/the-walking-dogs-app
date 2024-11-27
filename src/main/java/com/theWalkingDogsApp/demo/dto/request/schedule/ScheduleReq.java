@@ -2,10 +2,11 @@ package com.theWalkingDogsApp.demo.dto.request.schedule;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
-import java.time.LocalDate;
-import java.util.List;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
