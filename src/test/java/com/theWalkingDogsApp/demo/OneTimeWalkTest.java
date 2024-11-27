@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
+import com.theWalkingDogsApp.demo.model.dogOwner.DogOwner;
 import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
 import com.theWalkingDogsApp.demo.model.walkBooking.WalkBooking;
 import com.theWalkingDogsApp.demo.model.walkRequest.OneTimeWalk;
@@ -23,6 +24,7 @@ public class OneTimeWalkTest {
     String phoneNumber = "";
     String message = "";
     DogWalker dogWalker = mock(DogWalker.class);
+    DogOwner dogOwner = mock(DogOwner.class);
     List<LocalTime> walkingHours = List.of(LocalTime.of(10, 0), LocalTime.of(13, 0), LocalTime.of(20, 0));
     WalkPerDate walkPerDate1 = new WalkPerDate(LocalDate.of(2024,7,10),walkingHours);
     WalkPerDate walkPerDate2 = new WalkPerDate(LocalDate.of(2024,7,11),walkingHours);
@@ -31,7 +33,7 @@ public class OneTimeWalkTest {
     List<WalkPerDate> walkPerDates = List.of(walkPerDate1, walkPerDate2, walkPerDate3);
 
     OneTimeWalk
-        oneTimeWalk = new OneTimeWalk(pets,phoneNumber,message,dogWalker, walkPerDates);
+        oneTimeWalk = new OneTimeWalk(pets,phoneNumber,message,dogWalker,dogOwner, walkPerDates);
     WalkBooking booking = oneTimeWalk.createBooking();
 
     assertEquals(9, booking.getWalks().size());

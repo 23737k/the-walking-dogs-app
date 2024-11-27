@@ -2,9 +2,9 @@ package com.theWalkingDogsApp.demo.service;
 
 import com.theWalkingDogsApp.demo.dto.request.careGiver.DogWalkerReq;
 import com.theWalkingDogsApp.demo.dto.response.careGiver.DogWalkerRes;
-import com.theWalkingDogsApp.demo.model.user.User;
+import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
 import com.theWalkingDogsApp.demo.repository.DogWalkerRepo;
-import com.theWalkingDogsApp.demo.service.mapper.careGiver.DogWalkerMapper;
+import com.theWalkingDogsApp.demo.service.mapper.dogWalker.DogWalkerMapper;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,5 +32,9 @@ public class DogWalkerService {
 
     public boolean isEmpty(){
         return dogWalkerRepo.count() == 0;
+    }
+
+    public DogWalker findDogWalkerById(Integer id) {
+        return dogWalkerRepo.findById(id).orElseThrow(()-> new EntityNotFoundException("Dog walker with id: " + id + " not found"));
     }
 }

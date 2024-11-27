@@ -1,5 +1,6 @@
 package com.theWalkingDogsApp.demo.model.user;
 
+import com.theWalkingDogsApp.demo.model.dogOwner.DogOwner;
 import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
 import jakarta.persistence.*;
 import java.util.Collection;
@@ -28,6 +29,8 @@ public class User implements UserDetails {
     private UserProfile profile;
     @OneToOne(cascade = CascadeType.ALL)
     private DogWalker dogWalker = new DogWalker();
+    @OneToOne(cascade = CascadeType.ALL)
+    private DogOwner dogOwner = new DogOwner();
 
     public User(String email, String password, UserProfile profile) {
         this.email = email;

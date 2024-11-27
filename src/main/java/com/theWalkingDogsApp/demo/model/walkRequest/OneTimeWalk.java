@@ -2,6 +2,7 @@ package com.theWalkingDogsApp.demo.model.walkRequest;
 
 import static com.theWalkingDogsApp.demo.model.walkBooking.WalkStatus.SCHEDULED;
 
+import com.theWalkingDogsApp.demo.model.dogOwner.DogOwner;
 import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
 import com.theWalkingDogsApp.demo.model.pet.Pet;
 import com.theWalkingDogsApp.demo.model.walkBooking.Walk;
@@ -26,8 +27,8 @@ public class OneTimeWalk extends WalkRequest{
   @JoinColumn(name = "one_time_request_id")
   private List<WalkPerDate> walksPerDate;
 
-  public OneTimeWalk(List<Pet> pets, String phoneNumber, String message, DogWalker dogWalker, List<WalkPerDate> walksPerDate) {
-    super(pets, phoneNumber, message, dogWalker);
+  public OneTimeWalk(List<Pet> pets, String phoneNumber, String message, DogWalker dogWalker, DogOwner dogOwner, List<WalkPerDate> walksPerDate) {
+    super(pets, phoneNumber, message, dogWalker,dogOwner);
     this.walksPerDate = walksPerDate;
   }
 

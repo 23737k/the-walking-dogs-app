@@ -21,15 +21,22 @@ public class WalkRequestService {
   private final WalkRequestMapper mapper;
 
 
-  public List<WalkRequestRes> getAll(User user) {
-    List<WalkRequest> walkRequests = walkRequestRepo.findAllByUser(user);
+  @Transactional
+  public List<WalkRequestRes> getDogOwnerRequests(User user) {
+    List<WalkRequest> walkRequests = walkRequestRepo.findAllByDogOwner(user.getDogOwner());
     return walkRequests.stream().map(mapper::toRes).toList();
   }
+  @Transactional
+  public List<WalkRequestRes> getDogWalkerRequests(User user) {
+    List<WalkRequest> walkRequests = walkRequestRepo.findAllByDogWalker(user.getDogWalker());
+    return walkRequests.stream().map(mapper::toRes).toList();
+  }
+
 
   @Transactional
   public WalkRequestRes add(User user, WalkRequestReq req) {
     var walkRequest = mapper.toEntity(req);
-    walkRequest.setDogWalker(user.getDogWalker());
+    walkRequest.setDogOwner(user.getDogOwner());
     return  mapper.toRes(walkRequestRepo.save(walkRequest));
   }
 

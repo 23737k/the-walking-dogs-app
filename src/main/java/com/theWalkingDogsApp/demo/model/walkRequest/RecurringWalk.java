@@ -2,6 +2,7 @@ package com.theWalkingDogsApp.demo.model.walkRequest;
 
 import static com.theWalkingDogsApp.demo.model.walkBooking.WalkStatus.SCHEDULED;
 
+import com.theWalkingDogsApp.demo.model.dogOwner.DogOwner;
 import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
 import com.theWalkingDogsApp.demo.model.pet.Pet;
 import com.theWalkingDogsApp.demo.model.schedule.WeekDay;
@@ -31,8 +32,9 @@ public class RecurringWalk extends WalkRequest{
     private LocalDate endOfService;
 
     public RecurringWalk(List<Pet> pets, String phoneNumber, String message, DogWalker dogWalker,
+                         DogOwner dogOwner,
                          List<WalkPerWeek> walksPerWeekDays, LocalDate startOfService, LocalDate endOfService){
-        super(pets,phoneNumber,message,dogWalker);
+        super(pets,phoneNumber,message,dogWalker,dogOwner);
         this.walksPerWeekDays = walksPerWeekDays;
         this.startOfService = startOfService;
         this.endOfService = endOfService;

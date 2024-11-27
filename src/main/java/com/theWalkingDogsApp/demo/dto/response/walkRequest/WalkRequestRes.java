@@ -10,4 +10,5 @@ public class WalkRequestRes {
   protected String phoneNumber;
   protected String message;
   protected Integer dogWalkerId;
+  protected Integer dogOwnerId;
   }

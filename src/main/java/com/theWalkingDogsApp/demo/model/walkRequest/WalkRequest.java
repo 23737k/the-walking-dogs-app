@@ -1,5 +1,6 @@
 package com.theWalkingDogsApp.demo.model.walkRequest;
 
+import com.theWalkingDogsApp.demo.model.dogOwner.DogOwner;
 import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
 import com.theWalkingDogsApp.demo.model.pet.Pet;
 import com.theWalkingDogsApp.demo.model.walkBooking.WalkBooking;
@@ -33,12 +34,15 @@ public abstract class WalkRequest {
     protected String message;
     @ManyToOne
     protected DogWalker dogWalker;
+    @ManyToOne
+    protected DogOwner dogOwner;
 
-    public WalkRequest(List<Pet> pets, String phoneNumber, String message, DogWalker dogWalker){
+    public WalkRequest(List<Pet> pets, String phoneNumber, String message, DogWalker dogWalker, DogOwner dogOwner){
         this.pets = pets;
         this.phoneNumber = phoneNumber;
         this.message = message;
         this.dogWalker = dogWalker;
+        this.dogOwner = dogOwner;
     }
     public abstract WalkBooking createBooking();
 }

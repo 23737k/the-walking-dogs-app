@@ -16,17 +16,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("${backend.api.base-path}/dogWalkers/walkRequests")
+@RequestMapping("${backend.api.base-path}/walkRequests")
 @AllArgsConstructor
 public class WalkRequestController {
   private final WalkRequestService walkRequestService;
 
   @GetMapping
-  public ResponseEntity<List<WalkRequestRes>> getAllWalkRequests(Principal principal) {
-    return ResponseEntity.ok(walkRequestService.getAll(getUser(principal)));
+  public ResponseEntity<List<WalkRequestRes>> getAllWalkRequests(Principal principal, @RequestParam(required = false) boolean asDogWalker) {
+    if (asDogWalker)
+      return ResponseEntity.ok(walkRequestService.getDogWalkerRequests(getUser(principal)));
+
+    else
+      return ResponseEntity.ok(walkRequestService.getDogOwnerRequests(getUser(principal)));
   }
 
   @PostMapping
@@ -39,6 +44,7 @@ public class WalkRequestController {
     walkRequestService.deleteWalkRequest(walkRequestId);
     return ResponseEntity.noContent().build();
   }
+
   @DeleteMapping
   public ResponseEntity<?> deleteAllWalkRequests(Principal principal) {
     walkRequestService.deleteAllWalkRequests(getUser(principal));
