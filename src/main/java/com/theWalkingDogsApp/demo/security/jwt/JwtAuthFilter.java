@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @RequiredArgsConstructor
@@ -62,14 +63,16 @@ public class JwtAuthFilter extends OncePerRequestFilter {
   }
 
   public void sendErrorResponse(HttpServletResponse response, int errorCode) throws IOException {
-    response.getWriter().write("Access denied");
+    //response.getWriter().write("Access denied");
     response.setStatus(errorCode);
     response.setContentType("application/json");
   }
 
   public boolean shouldNotFilter(HttpServletRequest request) {
+    AntPathMatcher pathMatcher = new AntPathMatcher();
+    String uri = request.getRequestURI();
     for (String path : whiteListedUrls) {
-      if (request.getRequestURI().startsWith(path)) {
+      if (pathMatcher.match(path, uri)) {
         return true;
       }
     }
