@@ -68,7 +68,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
   }
 
   public boolean shouldNotFilter(HttpServletRequest request) {
-    return Arrays.stream(whiteListedUrls).anyMatch(request.getRequestURI()::startsWith);
+    for (String path : whiteListedUrls) {
+      if (request.getRequestURI().startsWith(path)) {
+        return true;
+      }
+    }
+    return false;
   }
 
 

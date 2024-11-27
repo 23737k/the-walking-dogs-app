@@ -32,9 +32,11 @@ public class AppConfig {
         "/v3/api-docs/**",
         "/swagger-resources",
         "/swagger-resources/**",
+        "/swagger-initializer",
         "/configuration/ui",
         "/configuration/security",
         "/swagger-ui/**",
+        "/swagger-ui/*",
         "/webjars/**",
         "/swagger-ui.html"
     };
