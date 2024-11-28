@@ -1,17 +1,11 @@
 package com.theWalkingDogsApp.demo.dto.response.walkBooking;
 
 import com.theWalkingDogsApp.demo.dto.response.walkRequest.PetRes;
-import com.theWalkingDogsApp.demo.model.dogOwner.DogOwner;
-import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
-import com.theWalkingDogsApp.demo.model.pet.Pet;
-import com.theWalkingDogsApp.demo.model.walkBooking.Walk;
-import jakarta.persistence.*;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor

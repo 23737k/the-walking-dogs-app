@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class PetReqDto {
+public class PetReq {
   @NotBlank(message = "name field must not be empty")
   private String name;
   @NotBlank(message = "breed field must not be empty")

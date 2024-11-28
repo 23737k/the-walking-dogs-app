@@ -17,6 +17,7 @@ server:
 bootstrap:
   number-of-dog-walkers: 25
 backend:
+  baseUrl: ${BACKEND_BASE_URL:http://localhost:8080}
   api:
     base-path: /api/v1
 

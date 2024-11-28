@@ -1,6 +1,5 @@
 package com.theWalkingDogsApp.demo.service.mapper.walkBooking;
 
-import com.theWalkingDogsApp.demo.dto.request.walkBooking.WalkBookingReq;
 import com.theWalkingDogsApp.demo.dto.response.walkBooking.WalkBookingRes;
 import com.theWalkingDogsApp.demo.model.walkBooking.WalkBooking;
 import org.mapstruct.Mapper;

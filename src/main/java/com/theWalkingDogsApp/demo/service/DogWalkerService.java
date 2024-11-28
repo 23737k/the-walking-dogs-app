@@ -6,10 +6,9 @@ import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
 import com.theWalkingDogsApp.demo.repository.DogWalkerRepo;
 import com.theWalkingDogsApp.demo.service.mapper.dogWalker.DogWalkerMapper;
 import jakarta.persistence.EntityNotFoundException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
