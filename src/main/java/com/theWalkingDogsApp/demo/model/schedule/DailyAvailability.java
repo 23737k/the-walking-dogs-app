@@ -4,6 +4,7 @@ import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class DailyAvailability {
   private Integer id;
   @Enumerated
   private WeekDay weekDay;
-  @ElementCollection
+  @ElementCollection()
   @CollectionTable(joinColumns = @JoinColumn(name = "daily_availability_id"))
   @Column(name = "time_slot")
   private Set<TimeSlot> timeSlots;

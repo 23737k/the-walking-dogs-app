@@ -1,6 +1,7 @@
 package com.theWalkingDogsApp.demo.repository.specification;
 
 import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
+import com.theWalkingDogsApp.demo.model.pet.DogSize;
 import com.theWalkingDogsApp.demo.model.schedule.TimeSlot;
 import com.theWalkingDogsApp.demo.model.schedule.WeekDay;
 import jakarta.persistence.criteria.Predicate;
@@ -21,6 +22,10 @@ public class DogWalkerSpec {
       spec = spec.and(isAvailableOnWeekDays(filter.weekDays()));
     if(filter.timeSlots()!= null)
       spec = spec.and(isAvailableOnTimeSlots(filter.timeSlots()));
+    if(filter.maxRate() != null || filter.minRate() != null)
+      spec = spec.and(rateBetween(filter.maxRate(), filter.minRate()));
+    if(filter.dogSizes()!=null)
+      spec = spec.and(allowDogSizes(filter.dogSizes()));
     return spec;
   }
 
@@ -60,5 +65,37 @@ public class DogWalkerSpec {
     };
   }
 
+  private Specification<DogWalker> rateBetween(Integer max, Integer min){
+    return (root, criteria, builder) -> {
+      Predicate predicate;
+      if(max != null){
+        if (min!=null){
+          predicate = builder.between(root.get("ratePerWalk"), min, max);
+        }
+        else
+          predicate = builder.lessThanOrEqualTo(root.get("ratePerWalk"), max);
+      }
+      else
+        predicate = builder.greaterThanOrEqualTo(root.get("ratePerWalk"), min);
+      return predicate;
+    };
+  }
+
+  private Specification<DogWalker> allowDogSizes(List<DogSize> dogSizes){
+    return (root, criteria, builder) -> {
+     Subquery<Long> subquery = criteria.subquery(Long.class);
+     Root<DogWalker> baseRoot = subquery.from(DogWalker.class);
+     var joinRoot = baseRoot.join("dogSizesAllowed");
+     Predicate predicate = builder.and(
+         builder.equal(root.get("id"),baseRoot.get("id")),
+         joinRoot.in(dogSizes));
+     subquery.select(builder.countDistinct(joinRoot)).where(predicate);
+     return builder.equal(subquery,dogSizes.size());
+    };
+  }
+
+//  private Specification<Dog> radiusWithin(int radius){
+//
+//  }
 
 }

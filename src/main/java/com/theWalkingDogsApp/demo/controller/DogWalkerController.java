@@ -32,7 +32,7 @@ public class DogWalkerController {
   private final DogWalkerService service;
 
   @GetMapping
-  public ResponseEntity<List<DogWalkerRes>> getDogWalkers(@ParameterObject @ModelAttribute DogWalkerFilter filter) {
+  public ResponseEntity<List<DogWalkerRes>> getDogWalkers(@ParameterObject @ModelAttribute @Validated DogWalkerFilter filter) {
     return ResponseEntity.ok(service.getDogWalkers(filter));
   }
 
