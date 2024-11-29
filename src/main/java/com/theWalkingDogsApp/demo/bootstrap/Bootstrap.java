@@ -11,14 +11,17 @@ import com.theWalkingDogsApp.demo.model.user.User;
 import com.theWalkingDogsApp.demo.model.user.UserProfile;
 import com.theWalkingDogsApp.demo.repository.UserRepository;
 import com.theWalkingDogsApp.demo.service.DogWalkerService;
+import java.sql.Time;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -84,10 +87,13 @@ public class Bootstrap {
         List<WeekDay> weekDays = EnumSet.allOf(WeekDay.class).stream().toList();
         List<TimeSlot> timeSlots = EnumSet.allOf(TimeSlot.class).stream().toList();
         List<DailyAvailability> dailyAvailabilities = new ArrayList<>();
+        Set<TimeSlot> timeSlotSet = new HashSet<>();
+        for(int j = 0; j<4; j++){
+            timeSlotSet.add(timeSlots.get(new Random().nextInt(3)));
+        }
         for(int i = 0 ; i< 7; i++){
             int rnd1 = new Random().nextInt(7);
-            int rnd2 = new Random().nextInt(3);
-            dailyAvailabilities.add(new DailyAvailability(weekDays.get(rnd1), Set.of(timeSlots.get(rnd2))));
+            dailyAvailabilities.add(new DailyAvailability(weekDays.get(rnd1), timeSlotSet));
         }
         if(dailyAvailabilities.isEmpty()){
             dailyAvailabilities.add(new DailyAvailability(weekDays.get(0), Set.of(timeSlots.get(0))));
