@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class WalkRequestReq {
+public abstract class WalkRequestReq {
   @JsonProperty("type")
   private String type;
   @Valid
