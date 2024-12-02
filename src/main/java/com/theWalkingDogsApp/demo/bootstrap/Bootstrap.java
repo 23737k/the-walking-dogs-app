@@ -7,26 +7,19 @@ import com.theWalkingDogsApp.demo.model.schedule.DailyAvailability;
 import com.theWalkingDogsApp.demo.model.schedule.Schedule;
 import com.theWalkingDogsApp.demo.model.schedule.TimeSlot;
 import com.theWalkingDogsApp.demo.model.schedule.WeekDay;
+import com.theWalkingDogsApp.demo.model.user.Role;
 import com.theWalkingDogsApp.demo.model.user.User;
 import com.theWalkingDogsApp.demo.model.user.UserProfile;
 import com.theWalkingDogsApp.demo.repository.UserRepository;
 import com.theWalkingDogsApp.demo.service.DogWalkerService;
-import java.sql.Time;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
-import java.util.Set;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.ZoneId;
+import java.util.*;
 
 @Component
 @RequiredArgsConstructor
@@ -67,7 +60,12 @@ public class Bootstrap {
             .phoneNumber(faker.phoneNumber().phoneNumber())
             .build();
 
-      return new User(faker.internet().emailAddress(), passwordEncoder.encode("P@ssw0rd!"),profile);
+      return User.builder()
+              .email(faker.internet().emailAddress())
+              .password(passwordEncoder.encode("P@ssw0rd!"))
+              .profile(profile)
+              .role(Role.USER)
+              .build();
     }
 
     @Transactional

@@ -2,27 +2,20 @@ package com.theWalkingDogsApp.demo.controller;
 
 import com.theWalkingDogsApp.demo.dto.request.careGiver.DogWalkerReq;
 import com.theWalkingDogsApp.demo.dto.response.dogWalker.DogWalkerRes;
-import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
+import com.theWalkingDogsApp.demo.model.user.User;
 import com.theWalkingDogsApp.demo.repository.specification.DogWalkerFilter;
-import com.theWalkingDogsApp.demo.repository.specification.DogWalkerSpec;
 import com.theWalkingDogsApp.demo.service.DogWalkerService;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import io.swagger.v3.oas.annotations.security.SecurityRequirements;
-import io.swagger.v3.oas.annotations.security.SecurityScheme;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequestMapping("${backend.api.base-path}/dogWalkers")
@@ -41,10 +34,31 @@ public class DogWalkerController {
     return ResponseEntity.ok(service.getDogWalkerById(id));
   }
 
-  //TODO
-  @PutMapping()
-  public ResponseEntity<DogWalkerRes> updateDogWalker(@RequestBody @Validated DogWalkerReq dogWalkerReq) {
-    return ResponseEntity.ok(service.updateDogWalker(dogWalkerReq));
+  @GetMapping("/me")
+  public ResponseEntity<DogWalkerRes> getDogWalker(Principal principal){
+    User user =(User)( ((UsernamePasswordAuthenticationToken)principal).getPrincipal());
+    return ResponseEntity.ok(service.getDogWalkerById(user.getDogWalker().getId()));
+  }
+
+  @PreAuthorize("hasRole('ADMIN')")
+  @DeleteMapping("/{id}")
+  public ResponseEntity<String> deleteDogWalker(@PathVariable Integer id){
+    service.deleteDogWalkerById(id);
+    return ResponseEntity.ok("Deleted successfully");
+  }
+
+  @PreAuthorize("hasRole('ADMIN')")
+  @DeleteMapping
+  public ResponseEntity<String> deleteAllDogWalkers(){
+    service.deleteAll();
+    return ResponseEntity.ok("All deleted successfully");
+  }
+
+
+  @PutMapping("/me")
+  public ResponseEntity<DogWalkerRes> updateDogWalker(Principal principal, @RequestBody @Validated DogWalkerReq dogWalkerReq) {
+    User user =(User)( ((UsernamePasswordAuthenticationToken)principal).getPrincipal());
+    return ResponseEntity.ok(service.updateDogWalker(user.getDogWalker().getId(),dogWalkerReq));
   }
 
 }

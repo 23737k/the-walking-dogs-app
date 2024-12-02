@@ -1,18 +1,15 @@
 package com.theWalkingDogsApp.demo.model.dogOwner;
 
+import com.theWalkingDogsApp.demo.model.pet.Pet;
 import com.theWalkingDogsApp.demo.model.walkRequest.WalkRequest;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -25,4 +22,6 @@ public class DogOwner {
   private Integer id;
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   private List<WalkRequest> walkRequests = new ArrayList<>();
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Pet> pets = new ArrayList<>();
 }

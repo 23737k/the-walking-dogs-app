@@ -7,9 +7,10 @@ import com.theWalkingDogsApp.demo.model.schedule.WeekDay;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import jakarta.persistence.criteria.Subquery;
-import java.util.List;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DogWalkerSpec {

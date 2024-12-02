@@ -8,10 +8,11 @@ import com.theWalkingDogsApp.demo.repository.specification.DogWalkerFilter;
 import com.theWalkingDogsApp.demo.repository.specification.DogWalkerSpec;
 import com.theWalkingDogsApp.demo.service.mapper.dogWalker.DogWalkerMapper;
 import jakarta.persistence.EntityNotFoundException;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -30,8 +31,11 @@ public class DogWalkerService {
                 .orElseThrow(()-> new EntityNotFoundException("Dog walker with id: " + id + " not found")));
     }
 
-    public DogWalkerRes updateDogWalker( DogWalkerReq dogWalkerReq) {
-        return null;
+    public DogWalkerRes updateDogWalker(Integer id, DogWalkerReq dogWalkerReq) {
+        findDogWalkerById(id);
+        DogWalker updatedDogWalker = dogWalkerMapper.toEntity(dogWalkerReq);
+        updatedDogWalker.setId(id);
+        return dogWalkerMapper.toRes(dogWalkerRepo.save(updatedDogWalker));
     }
 
     public boolean isEmpty(){
@@ -40,5 +44,15 @@ public class DogWalkerService {
 
     public DogWalker findDogWalkerById(Integer id) {
         return dogWalkerRepo.findById(id).orElseThrow(()-> new EntityNotFoundException("Dog walker with id: " + id + " not found"));
+    }
+
+    public void deleteDogWalkerById(Integer id) {
+        if(!dogWalkerRepo.existsById(id))
+            throw new EntityNotFoundException("Dog walker with id: " + id + " not found");
+        dogWalkerRepo.deleteById(id);
+    }
+
+    public void deleteAll() {
+        dogWalkerRepo.deleteAll();
     }
 }

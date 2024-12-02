@@ -4,6 +4,7 @@ import com.theWalkingDogsApp.demo.model.pet.DogSize;
 import com.theWalkingDogsApp.demo.model.schedule.TimeSlot;
 import com.theWalkingDogsApp.demo.model.schedule.WeekDay;
 import jakarta.validation.constraints.Positive;
+
 import java.util.List;
 
 public record DogWalkerFilter(

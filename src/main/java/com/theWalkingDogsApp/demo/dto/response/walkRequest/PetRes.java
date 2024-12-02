@@ -1,7 +1,6 @@
 package com.theWalkingDogsApp.demo.dto.response.walkRequest;
 
 import com.theWalkingDogsApp.demo.model.pet.Sex;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data

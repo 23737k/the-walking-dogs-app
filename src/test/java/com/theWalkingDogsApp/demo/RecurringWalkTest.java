@@ -1,21 +1,22 @@
 package com.theWalkingDogsApp.demo;
 
-import static com.theWalkingDogsApp.demo.model.schedule.WeekDay.MONDAY;
-import static com.theWalkingDogsApp.demo.model.schedule.WeekDay.TUESDAY;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-
 import com.theWalkingDogsApp.demo.model.dogOwner.DogOwner;
 import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
 import com.theWalkingDogsApp.demo.model.pet.Pet;
 import com.theWalkingDogsApp.demo.model.walkBooking.WalkBooking;
 import com.theWalkingDogsApp.demo.model.walkRequest.RecurringWalk;
 import com.theWalkingDogsApp.demo.model.walkRequest.WalkPerWeek;
+import org.junit.jupiter.api.Test;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Test;
+
+import static com.theWalkingDogsApp.demo.model.schedule.WeekDay.MONDAY;
+import static com.theWalkingDogsApp.demo.model.schedule.WeekDay.TUESDAY;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 
 public class RecurringWalkTest {
   private final List<Pet> pets = new ArrayList<>();

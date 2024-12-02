@@ -2,10 +2,11 @@ package com.theWalkingDogsApp.demo.dto.response.schedule;
 
 import com.theWalkingDogsApp.demo.model.schedule.TimeSlot;
 import com.theWalkingDogsApp.demo.model.schedule.WeekDay;
-import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+
+import java.util.Set;
 
 @Data
 @AllArgsConstructor

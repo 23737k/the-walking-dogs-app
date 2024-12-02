@@ -1,7 +1,5 @@
 package com.theWalkingDogsApp.demo.service.mapper.walkRequest;
 
-import static org.mapstruct.SubclassExhaustiveStrategy.RUNTIME_EXCEPTION;
-
 import com.theWalkingDogsApp.demo.dto.request.walkRequest.OneTimeWalkReq;
 import com.theWalkingDogsApp.demo.dto.request.walkRequest.RecurringWalkReq;
 import com.theWalkingDogsApp.demo.dto.request.walkRequest.WalkRequestReq;
@@ -16,6 +14,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.SubclassMapping;
+
+import static org.mapstruct.SubclassExhaustiveStrategy.RUNTIME_EXCEPTION;
 
 @Mapper(componentModel = "spring", subclassExhaustiveStrategy = RUNTIME_EXCEPTION, uses = DogWalkerService.class)
 public interface WalkRequestMapper {

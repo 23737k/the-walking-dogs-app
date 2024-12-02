@@ -1,6 +1,9 @@
 package com.theWalkingDogsApp.demo.security.auth;
 
 import com.theWalkingDogsApp.demo.exceptions.UserAlreadyExistsException;
+import com.theWalkingDogsApp.demo.model.dogOwner.DogOwner;
+import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
+import com.theWalkingDogsApp.demo.model.user.Role;
 import com.theWalkingDogsApp.demo.model.user.User;
 import com.theWalkingDogsApp.demo.model.user.UserProfile;
 import com.theWalkingDogsApp.demo.security.jwt.JwtService;
@@ -22,7 +25,6 @@ public class AuthenticationService {
   private final TokenService tokenService;
   private final AuthenticationProvider authenticationProvider;
   private final UserService userService;
-  private final PasswordEncoder passwordEncoder;
 
   @Transactional
   public AuthRes authenticate(AuthReq authReq) {
@@ -39,15 +41,7 @@ public class AuthenticationService {
     if(userService.userExists(req.getEmail()))
       throw new UserAlreadyExistsException("This email is already registered");
 
-    UserProfile userProfile = UserProfile.builder()
-        .firstname(req.getFirstname())
-        .lastname(req.getLastname())
-        .dob(req.getDob())
-        .phoneNumber(req.getPhoneNumber())
-        .build();
-
-    User user = new User(req.getEmail(), passwordEncoder.encode(req.getPassword()), userProfile);
-    user = userService.save(user);
+    User user = userService.createUser(req);
 
     Token token = new Token(jwtService.getAccessToken(user));
     tokenService.save(token);

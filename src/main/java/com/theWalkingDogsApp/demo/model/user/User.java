@@ -2,15 +2,7 @@ package com.theWalkingDogsApp.demo.model.user;
 
 import com.theWalkingDogsApp.demo.model.dogOwner.DogOwner;
 import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import java.util.Collection;
-import java.util.Collections;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +10,10 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -37,16 +33,12 @@ public class User implements UserDetails {
     private DogWalker dogWalker = new DogWalker();
     @OneToOne(cascade = CascadeType.ALL)
     private DogOwner dogOwner = new DogOwner();
-
-    public User(String email, String password, UserProfile profile) {
-        this.email = email;
-        this.password = password;
-        this.profile = profile;
-    }
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
+        return role.getAuthorities();
     }
 
     @Override
