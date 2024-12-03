@@ -39,4 +39,6 @@ public class WalkController {
         return ResponseEntity.ok(service.updateWalk(user,walkBookingId,walkId,req));
     }
 
+
+
 }

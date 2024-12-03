@@ -1,9 +1,7 @@
 package com.theWalkingDogsApp.demo.model.pet;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.theWalkingDogsApp.demo.model.dogOwner.DogOwner;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +17,8 @@ public class Pet {
     private double weighInKg;
     private Sex sex;
     private Integer age;
+    @ManyToOne
+    private DogOwner dogOwner;
 
 
     public Pet(String name, String breed, Sex sex, Integer age, double weighInKg) {
