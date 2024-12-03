@@ -38,7 +38,7 @@ public class DogWalkerController {
   }
 
   @GetMapping("/me")
-  @Operation(summary = "Get DogWalker profile of the current user")
+  @Operation(summary = "Get the DogWalker profile of the current user")
   public ResponseEntity<DogWalkerRes> getDogWalker(Principal principal){
     User user =(User)( ((UsernamePasswordAuthenticationToken)principal).getPrincipal());
     return ResponseEntity.ok(service.getDogWalkerById(user.getDogWalker().getId()));
