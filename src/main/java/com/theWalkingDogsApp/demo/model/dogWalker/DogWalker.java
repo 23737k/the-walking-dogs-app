@@ -8,14 +8,17 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -26,17 +29,15 @@ public class DogWalker {
   private Integer id;
   @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
   private Schedule schedule;
-  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-  @JoinColumn(name="dog_walker_id")
-  private List<WalkRequest> walkRequests = new ArrayList<>();
-  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-  @JoinColumn(name = "dog_walker_id")
-  private List<WalkBooking> walkBookings = new ArrayList<>();
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "dogWalker")
+  private List<WalkRequest> walkRequests;
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "dogWalker")
+  private List<WalkBooking> walkBookings;
   private Integer ratePerWalk;
   @ElementCollection
   @CollectionTable(joinColumns = @JoinColumn(name = "dog_walker_id"))
   @Column(name = "dogSize")
-  private Set<DogSize> dogSizesAllowed =  new HashSet<>();
+  private Set<DogSize> dogSizesAllowed;
   private Integer serviceRadius;
   @Column(length = 512)
   private String bio;

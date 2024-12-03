@@ -86,12 +86,14 @@ public class Bootstrap {
         List<TimeSlot> timeSlots = EnumSet.allOf(TimeSlot.class).stream().toList();
         List<DailyAvailability> dailyAvailabilities = new ArrayList<>();
         Set<TimeSlot> timeSlotSet = new HashSet<>();
-        for(int j = 0; j<4; j++){
-            timeSlotSet.add(timeSlots.get(new Random().nextInt(3)));
+        Random random = new Random();
+        for(int j = 0; j<3; j++){
+            if(random.nextBoolean())
+                timeSlotSet.add(timeSlots.get(j));
         }
         for(int i = 0 ; i< 7; i++){
-            int rnd1 = new Random().nextInt(7);
-            dailyAvailabilities.add(new DailyAvailability(weekDays.get(rnd1), timeSlotSet));
+            if(random.nextBoolean())
+                dailyAvailabilities.add(new DailyAvailability(weekDays.get(i), timeSlotSet));
         }
         if(dailyAvailabilities.isEmpty()){
             dailyAvailabilities.add(new DailyAvailability(weekDays.get(0), Set.of(timeSlots.get(0))));

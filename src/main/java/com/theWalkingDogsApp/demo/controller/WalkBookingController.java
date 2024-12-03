@@ -34,11 +34,6 @@ public class WalkBookingController {
         return ResponseEntity.ok(service.addWalkBooking(getUser(principal), walkBookingReq));
     }
 
-//    @GetMapping("/{walkBookingId}")
-//    public ResponseEntity<?> getWalkBookingById(@PathVariable Integer walkBookingId){
-//        return ResponseEntity.ok(service.getWalkBookingById(walkBookingId));
-//    }
-
     private User getUser(Principal principal){
         return (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
     }

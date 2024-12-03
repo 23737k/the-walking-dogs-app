@@ -36,4 +36,5 @@ public abstract class WalkRequest {
         this.dogOwner = dogOwner;
     }
     public abstract WalkBooking createBooking();
+
 }

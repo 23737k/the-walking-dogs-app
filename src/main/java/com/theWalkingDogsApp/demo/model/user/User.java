@@ -27,11 +27,11 @@ public class User implements UserDetails {
     private Integer id;
     private String email;
     private String password;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private UserProfile profile;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private DogWalker dogWalker = new DogWalker();
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private DogOwner dogOwner = new DogOwner();
     @Enumerated(EnumType.STRING)
     private Role role;

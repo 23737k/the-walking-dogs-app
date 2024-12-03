@@ -55,4 +55,7 @@ To get started with this project, you will need to have the following installed 
 
 Class Diagram
 -
-![Class Diagram](the-walking-dogs-app-class-diagram.png)
+![Class Diagram](class-diagram.png)
+
+ERD Diagram
+
