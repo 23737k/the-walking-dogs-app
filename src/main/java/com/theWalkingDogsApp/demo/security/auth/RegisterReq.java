@@ -1,9 +1,7 @@
 package com.theWalkingDogsApp.demo.security.auth;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -23,6 +21,7 @@ public class RegisterReq {
   private String phoneNumber;
   @NotNull
   @Schema(example = "2000-01-01")
+  @Past(message = "the day of birth must be a past date")
   private LocalDate dob;
 
   @Email

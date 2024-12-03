@@ -57,8 +57,13 @@ public class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(InvalidFormatException.class)
-  public ResponseEntity<Object> handleException(InvalidFormatException ex) {
-    String errorMessage = "Invalid format: " + ex.getValue() + " is not a valid value for " + ex.getTargetType().getSimpleName();
+  public ResponseEntity<ExceptionRes<?>> handleException(InvalidFormatException ex) {
+    Class<?> targetType = ex.getTargetType();
+    String knownValues = Arrays.stream(targetType.getEnumConstants())
+            .map(Object::toString)
+            .collect(Collectors.joining(", "));
+    String errorMessage = "Invalid format: " + ex.getValue() + " is not a valid value for " + targetType.getSimpleName() +
+            ". Known values: " + knownValues;
     ExceptionRes<?> response = new ExceptionRes<>(400, "Bad request", errorMessage, null );
     return ResponseEntity.badRequest().body(response);
   }
@@ -89,15 +94,6 @@ public class GlobalExceptionHandler {
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
   }
 
-  @ExceptionHandler(HttpMessageNotReadableException.class)
-  public ResponseEntity<ExceptionRes<?>> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
-    if (ex.getCause() instanceof InvalidTypeIdException invalidTypeIdException) {
-      return handleException(invalidTypeIdException); // Reutiliza tu método específico
-    }
-    ExceptionRes<?> response = new ExceptionRes<>(400, "Bad request", "Malformed JSON request", null);
-    return ResponseEntity.badRequest().body(response);
-  }
-
   @ExceptionHandler(InvalidTypeIdException.class)
   public ResponseEntity<ExceptionRes<?>> handleException(InvalidTypeIdException ex) {
     String description = "Invalid type. " +  ex.getTypeId() + " is not a valid type."+  " Known types = [recurring, one-time]";
@@ -109,6 +105,18 @@ public class GlobalExceptionHandler {
   public ResponseEntity<ExceptionRes<?>> handleException(AuthorizationDeniedException ex){
     ExceptionRes<?> response = new ExceptionRes<>(401, "Unauthorized", "You need ADMIN role to execute this action", null);
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+  }
+  @ExceptionHandler(HttpMessageNotReadableException.class)
+  public ResponseEntity<ExceptionRes<?>> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
+    if (ex.getCause() instanceof InvalidTypeIdException invalidTypeIdException) {
+      return handleException(invalidTypeIdException);
+    }
+    if(ex.getCause() instanceof InvalidFormatException invalidFormatException)
+      return handleException(invalidFormatException);
+    else{
+      ExceptionRes<?> response = new ExceptionRes<>(400, "Bad request", "Malformed JSON request", null);
+      return ResponseEntity.badRequest().body(response);
+    }
   }
 
   @ExceptionHandler(Exception.class)

@@ -17,7 +17,6 @@ public class WalkBookingRes {
     private List<PetRes> pets;
     private String phoneNumber;
     private String message;
-    private List<WalkRes> walks;
     private Integer dogWalkerId;
     private Integer dogOwnerId;
 }
