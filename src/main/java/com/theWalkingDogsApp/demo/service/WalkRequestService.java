@@ -1,5 +1,7 @@
 package com.theWalkingDogsApp.demo.service;
 
+import com.theWalkingDogsApp.demo.dto.request.walkRequest.OneTimeWalkReq;
+import com.theWalkingDogsApp.demo.dto.request.walkRequest.RecurringWalkReq;
 import com.theWalkingDogsApp.demo.dto.request.walkRequest.WalkRequestReq;
 import com.theWalkingDogsApp.demo.dto.response.walkRequest.WalkRequestRes;
 import com.theWalkingDogsApp.demo.exceptions.ForbiddenAccessException;
@@ -34,6 +36,7 @@ public class WalkRequestService {
 
   @Transactional
   public WalkRequestRes add(User user, WalkRequestReq req) {
+    checkDates(req);
     var walkRequest = mapper.toEntity(req);
     walkRequest.setDogOwner(user.getDogOwner());
     return  mapper.toRes(repo.save(walkRequest));
@@ -59,5 +62,11 @@ public class WalkRequestService {
     return repo.findById(id).orElseThrow(()-> new EntityNotFoundException("WalkRequest with id " + id + " not found"));
   }
 
+  private void checkDates(WalkRequestReq req){
+    if (req instanceof RecurringWalkReq recurringWalkReq) {
+      if(recurringWalkReq.getStartOfService().isAfter(recurringWalkReq.getEndOfService()))
+        throw new IllegalStateException("Start date is after end date!");
+    }
+  }
 
 }

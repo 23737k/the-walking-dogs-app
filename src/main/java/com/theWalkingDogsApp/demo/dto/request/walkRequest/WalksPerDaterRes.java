@@ -1,5 +1,6 @@
 package com.theWalkingDogsApp.demo.dto.request.walkRequest;
 
+import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class WalksPerDaterRes {
   @NotNull(message = "date field must not be null")
+  @Future(message = "must be a future date")
   private LocalDate date;
   @NotEmpty(message = "walkingHours must not be empty")
   private List<LocalTime> walkingHours;
