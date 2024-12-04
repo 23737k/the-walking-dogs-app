@@ -1,0 +1,26 @@
+name: build and deploy
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-deploy:
+    name: build and deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: set up jdk
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: temurin
+
+      - name: build
+        run: |
+          mvn clean
+          mvn -B package -Dskiptests
+
+
+
