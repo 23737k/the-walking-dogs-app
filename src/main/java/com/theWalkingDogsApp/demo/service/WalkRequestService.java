@@ -1,6 +1,5 @@
 package com.theWalkingDogsApp.demo.service;
 
-import com.theWalkingDogsApp.demo.dto.request.walkRequest.OneTimeWalkReq;
 import com.theWalkingDogsApp.demo.dto.request.walkRequest.RecurringWalkReq;
 import com.theWalkingDogsApp.demo.dto.request.walkRequest.WalkRequestReq;
 import com.theWalkingDogsApp.demo.dto.response.walkRequest.WalkRequestRes;

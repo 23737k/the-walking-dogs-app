@@ -1,6 +1,5 @@
 package com.theWalkingDogsApp.demo.model.dogOwner;
 
-import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
 import com.theWalkingDogsApp.demo.model.pet.Pet;
 import com.theWalkingDogsApp.demo.model.walkRequest.WalkRequest;
 import jakarta.persistence.CascadeType;

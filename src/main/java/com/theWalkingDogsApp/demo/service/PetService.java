@@ -3,17 +3,15 @@ package com.theWalkingDogsApp.demo.service;
 import com.theWalkingDogsApp.demo.dto.request.walkRequest.PetReq;
 import com.theWalkingDogsApp.demo.dto.response.walkRequest.PetRes;
 import com.theWalkingDogsApp.demo.exceptions.ForbiddenAccessException;
-import com.theWalkingDogsApp.demo.model.dogOwner.DogOwner;
 import com.theWalkingDogsApp.demo.model.pet.Pet;
 import com.theWalkingDogsApp.demo.model.user.User;
 import com.theWalkingDogsApp.demo.repository.PetRepository;
 import com.theWalkingDogsApp.demo.service.mapper.PetMapper;
 import jakarta.persistence.EntityNotFoundException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
