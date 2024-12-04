@@ -9,11 +9,10 @@ import com.theWalkingDogsApp.demo.repository.specification.DogWalkerSpec;
 import com.theWalkingDogsApp.demo.service.mapper.dogWalker.DogWalkerMapper;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service

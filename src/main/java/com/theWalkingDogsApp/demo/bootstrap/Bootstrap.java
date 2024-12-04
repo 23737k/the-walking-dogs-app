@@ -12,14 +12,19 @@ import com.theWalkingDogsApp.demo.model.user.User;
 import com.theWalkingDogsApp.demo.model.user.UserProfile;
 import com.theWalkingDogsApp.demo.repository.UserRepository;
 import com.theWalkingDogsApp.demo.service.DogWalkerService;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Random;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.ZoneId;
-import java.util.*;
 
 @Component
 @RequiredArgsConstructor

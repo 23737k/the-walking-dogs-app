@@ -1,11 +1,7 @@
 package com.theWalkingDogsApp.demo.security.auth;
 
 import com.theWalkingDogsApp.demo.exceptions.UserAlreadyExistsException;
-import com.theWalkingDogsApp.demo.model.dogOwner.DogOwner;
-import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
-import com.theWalkingDogsApp.demo.model.user.Role;
 import com.theWalkingDogsApp.demo.model.user.User;
-import com.theWalkingDogsApp.demo.model.user.UserProfile;
 import com.theWalkingDogsApp.demo.security.jwt.JwtService;
 import com.theWalkingDogsApp.demo.security.token.Token;
 import com.theWalkingDogsApp.demo.security.token.TokenService;
@@ -14,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

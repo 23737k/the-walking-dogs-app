@@ -1,6 +1,5 @@
 package com.theWalkingDogsApp.demo.service;
 
-import ch.qos.logback.classic.encoder.JsonEncoder;
 import com.theWalkingDogsApp.demo.model.dogOwner.DogOwner;
 import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
 import com.theWalkingDogsApp.demo.model.user.Role;

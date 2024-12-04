@@ -5,7 +5,6 @@ import com.theWalkingDogsApp.demo.model.schedule.TimeSlot;
 import com.theWalkingDogsApp.demo.model.schedule.WeekDay;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.constraints.Positive;
-
 import java.util.List;
 
 public record DogWalkerFilter(
