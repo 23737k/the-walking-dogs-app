@@ -25,6 +25,7 @@ public class AppConfig {
         "/api/v1/auth/login",
         "/api/v1/auth/register",
         "/api/v1/auth/renew-token",
+        "/api/v1/keepAlive",
         "/v2/api-docs",
         "/v3/api-docs",
         "/v3/api-docs/**",

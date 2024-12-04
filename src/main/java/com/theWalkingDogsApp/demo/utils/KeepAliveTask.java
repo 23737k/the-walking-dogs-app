@@ -19,7 +19,7 @@ public class KeepAliveTask {
 
   @Scheduled(fixedRate = 840000)
   public void keepAlive() {
-    String endpoint = BACKEND_URL + API_BASE_PATH + "/keepalive";
+    String endpoint = BACKEND_URL + API_BASE_PATH + "/keepAlive";
     restTemplate.getForObject(endpoint, String.class);
     log.info("Keeping server alive");
   }
