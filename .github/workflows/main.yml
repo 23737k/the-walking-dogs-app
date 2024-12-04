@@ -20,7 +20,7 @@ jobs:
       - name: build
         run: |
           mvn clean
-          mvn -B package -Dskiptests
+          mvn -B package -DskipTests
 
 
 
