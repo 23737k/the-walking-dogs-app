@@ -1,7 +1,11 @@
 package com.theWalkingDogsApp.demo.model.pet;
 
 import com.theWalkingDogsApp.demo.model.dogOwner.DogOwner;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

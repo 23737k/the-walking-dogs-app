@@ -4,10 +4,9 @@ import com.theWalkingDogsApp.demo.model.schedule.TimeSlot;
 import com.theWalkingDogsApp.demo.model.schedule.WeekDay;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import java.util.List;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @NoArgsConstructor

@@ -1,20 +1,22 @@
 package com.theWalkingDogsApp.demo;
 
+import static com.theWalkingDogsApp.demo.model.schedule.TimeSlot.AFTERNOON;
+import static com.theWalkingDogsApp.demo.model.schedule.TimeSlot.MORNING;
+import static com.theWalkingDogsApp.demo.model.schedule.WeekDay.FRIDAY;
+import static com.theWalkingDogsApp.demo.model.schedule.WeekDay.MONDAY;
+import static com.theWalkingDogsApp.demo.model.schedule.WeekDay.SATURDAY;
+import static com.theWalkingDogsApp.demo.model.schedule.WeekDay.TUESDAY;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import com.theWalkingDogsApp.demo.model.schedule.DailyAvailability;
 import com.theWalkingDogsApp.demo.model.schedule.Schedule;
 import com.theWalkingDogsApp.demo.model.schedule.TimeSlot;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
-
-import static com.theWalkingDogsApp.demo.model.schedule.TimeSlot.AFTERNOON;
-import static com.theWalkingDogsApp.demo.model.schedule.TimeSlot.MORNING;
-import static com.theWalkingDogsApp.demo.model.schedule.WeekDay.*;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 
 public class ScheduleResTest {

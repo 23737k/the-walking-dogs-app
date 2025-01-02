@@ -1,6 +1,5 @@
 package com.theWalkingDogsApp.demo.service;
 
-import com.theWalkingDogsApp.demo.dto.request.walkRequest.OneTimeWalkReq;
 import com.theWalkingDogsApp.demo.dto.request.walkRequest.RecurringWalkReq;
 import com.theWalkingDogsApp.demo.dto.request.walkRequest.WalkRequestReq;
 import com.theWalkingDogsApp.demo.dto.response.walkRequest.WalkRequestRes;
@@ -10,11 +9,10 @@ import com.theWalkingDogsApp.demo.model.walkRequest.WalkRequest;
 import com.theWalkingDogsApp.demo.repository.WalkRequestRepo;
 import com.theWalkingDogsApp.demo.service.mapper.walkRequest.WalkRequestMapper;
 import jakarta.persistence.EntityNotFoundException;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @AllArgsConstructor

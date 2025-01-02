@@ -1,5 +1,7 @@
 package com.theWalkingDogsApp.demo.model.walkRequest;
 
+import static com.theWalkingDogsApp.demo.model.walkBooking.WalkStatus.SCHEDULED;
+
 import com.theWalkingDogsApp.demo.model.dogOwner.DogOwner;
 import com.theWalkingDogsApp.demo.model.dogWalker.DogWalker;
 import com.theWalkingDogsApp.demo.model.pet.Pet;
@@ -10,18 +12,15 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.theWalkingDogsApp.demo.model.walkBooking.WalkStatus.SCHEDULED;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
