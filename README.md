@@ -1,5 +1,5 @@
 # The Walking Dogs App
-Project for a Dog Walking and Care Services Application
+Project for a Dog Walking and Care Services Application 
 
 <!--
 Features
